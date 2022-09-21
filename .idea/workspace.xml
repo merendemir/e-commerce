@@ -4,37 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4c2eb0d3-07a4-4c5b-83b9-d24f2a0e43ea" name="Changes" comment="user crud operation">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/e/commerce/controller/ProductController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/e/commerce/controller/SellerController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/e/commerce/dto/AddressDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/e/commerce/dto/BaseProductDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/e/commerce/dto/ProductSellerInformation.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/e/commerce/dto/ProductWithSellerDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/e/commerce/dto/SellerAddNewProductDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/e/commerce/dto/SellerDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/e/commerce/dto/converter/AddressDtoConverter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/e/commerce/dto/converter/ProductDtoConverter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/e/commerce/dto/converter/SellerDtoConverter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/e/commerce/model/PriceAndStock.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/e/commerce/repository/AddressRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/e/commerce/repository/PriceAndStockRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/e/commerce/repository/ProductRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/e/commerce/repository/SellerRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/e/commerce/service/AddressService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/e/commerce/service/PriceAndStockService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/e/commerce/service/ProductService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/e/commerce/service/SellerService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/e/commerce/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/e/commerce/controller/UserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/e/commerce/dto/UserDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/e/commerce/dto/UserDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/e/commerce/exceptions/DataNotNullException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/e/commerce/exceptions/DataAlreadyExistsException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/e/commerce/exceptions/GlobalExceptionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/e/commerce/exceptions/GlobalExceptionHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/e/commerce/model/Address.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/e/commerce/model/Address.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/e/commerce/model/Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/e/commerce/model/Product.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/e/commerce/model/Seller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/e/commerce/model/Seller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/e/commerce/model/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/e/commerce/model/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/e/commerce/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/e/commerce/service/UserService.java" afterDir="false" />
-    </list>
+    <list default="true" id="4c2eb0d3-07a4-4c5b-83b9-d24f2a0e43ea" name="Changes" comment="Address, seller, product, PriceAndStock service impl" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -130,7 +100,7 @@
       <workItem from="1663608798338" duration="2644000" />
       <workItem from="1663656773488" duration="23525000" />
       <workItem from="1663688105991" duration="6455000" />
-      <workItem from="1663742207936" duration="7916000" />
+      <workItem from="1663742207936" duration="8592000" />
     </task>
     <task id="LOCAL-00001" summary="initial commit">
       <created>1663590473448</created>
@@ -153,7 +123,14 @@
       <option name="project" value="LOCAL" />
       <updated>1663662620145</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Address, seller, product, PriceAndStock service impl">
+      <created>1663755095917</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1663755095917</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -174,6 +151,7 @@
     <MESSAGE value="initial commit&#10;" />
     <MESSAGE value="initial commit" />
     <MESSAGE value="user crud operation" />
-    <option name="LAST_COMMIT_MESSAGE" value="user crud operation" />
+    <MESSAGE value="Address, seller, product, PriceAndStock service impl" />
+    <option name="LAST_COMMIT_MESSAGE" value="Address, seller, product, PriceAndStock service impl" />
   </component>
 </project>
