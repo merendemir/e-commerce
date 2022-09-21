@@ -1,10 +1,11 @@
 package com.e.commerce.model;
 
+import com.e.commerce.dto.BaseProductDto;
 import com.e.commerce.enums.ProductCategory;
 import lombok.*;
 
 import javax.persistence.*;
-import java.math.BigDecimal;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -25,10 +26,15 @@ public class Product {
 
     private String brand;
 
-    private BigDecimal price;
-
-    private Long stock;
-
     @ManyToMany(fetch = FetchType.LAZY)
     private Set<Seller> sellers;
+
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<PriceAndStock> priceAndStocks;
+
+    public Product(BaseProductDto baseProductDto) {
+        this.name = baseProductDto.getName();
+        this.productCategory = baseProductDto.getProductCategory();
+        this.brand = baseProductDto.getBrand();
+    }
 }

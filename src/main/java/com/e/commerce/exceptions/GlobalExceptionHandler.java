@@ -7,10 +7,13 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 
 @RestControllerAdvice
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
-
-
 	@ExceptionHandler(DataNotFoundException.class)
 	public ResponseEntity<Object> dataNotFoundException (DataNotFoundException e) {
+		return ResponseEntity.badRequest().body(e.getMessage());
+	}
+
+	@ExceptionHandler(DataAlreadyExistsException.class)
+	public ResponseEntity<Object> DataAlreadyExistsException (DataAlreadyExistsException e) {
 		return ResponseEntity.badRequest().body(e.getMessage());
 	}
 

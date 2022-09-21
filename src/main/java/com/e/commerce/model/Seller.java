@@ -1,11 +1,11 @@
 package com.e.commerce.model;
 
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
+import java.util.Date;
 
 @Entity
 @Getter
@@ -19,7 +19,14 @@ public class Seller {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String sellerName;
+    @UpdateTimestamp
+    private Date updatedAt;
+
+    @CreationTimestamp
+    private Date createdAt = new Date();
+
+    @Column(unique = true)
+    private String name;
 
     private String email;
 
@@ -28,8 +35,10 @@ public class Seller {
     @OneToOne(cascade = CascadeType.ALL)
     private Address address;
 
-    @ManyToMany(fetch = FetchType.LAZY)
-    private Set<Product> products;
-
-
+    public Seller(String name, String email, String phoneNumber, Address address) {
+        this.name = name;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+        this.address = address;
+    }
 }

@@ -1,10 +1,15 @@
 package com.e.commerce.model;
 
 import com.e.commerce.dto.UserDto;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -16,6 +21,12 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @UpdateTimestamp
+    private Date updatedAt;
+
+    @CreationTimestamp
+    private Date createdAt = new Date();
 
     private String name;
 

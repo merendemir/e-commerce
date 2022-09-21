@@ -1,12 +1,15 @@
 package com.e.commerce.service;
 
+import com.e.commerce.dto.AddressDto;
 import com.e.commerce.dto.UserDto;
+import com.e.commerce.dto.converter.AddressDtoConverter;
 import com.e.commerce.exceptions.DataNotFoundException;
+import com.e.commerce.model.Address;
 import com.e.commerce.model.User;
 import com.e.commerce.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -15,8 +18,14 @@ public class UserService {
 
 private  final UserRepository userRepository;
 
-    public UserService(UserRepository userRepository) {
+private final AddressService addressService;
+
+private final AddressDtoConverter addressDtoConverter;
+
+    public UserService(UserRepository userRepository, AddressService addressService, AddressDtoConverter addressDtoConverter) {
         this.userRepository = userRepository;
+        this.addressService = addressService;
+        this.addressDtoConverter = addressDtoConverter;
     }
 
     public UserDto createAndSaveUser(UserDto userDto) {
@@ -61,30 +70,51 @@ private  final UserRepository userRepository;
         return user;
     }
 
-    public void testSave() {
-        Long start = new Date().getTime();
-        for(int i = 0; i < 10000; i++) {
-            User user = new User();
-            user.setName("eren");
-            user.setLastName("demir");
-            user.setEmail("test");
-            user.setPhoneNumber("123");
-            userRepository.save(user);
-        }
-        Long end = new Date().getTime();
+    public List<AddressDto> saveUserAddress(Long userId, AddressDto addressDto) {
 
-        System.out.println("save " + (end-start));
+        User user = this.findUserByIdOrElseThrow(userId);
+
+        List<Address> userAddresses = user.getAddresses();
+
+        if (userAddresses == null) {
+            userAddresses = new ArrayList<>();
+        }
+
+        Address savedAddress = addressService.createAndSaveAddress(addressDto);
+
+        userAddresses.add(savedAddress);
+
+        user.setAddresses(userAddresses);
+        this.saveUser(user);
+
+        return this.getUserAddress(userId);
     }
 
-    public void testGet() {
-        Long start = new Date().getTime();
+    public List<AddressDto> getUserAddress(Long userId) {
+        return this.findUserByIdOrElseThrow(userId).getAddresses().stream()
+                .map(addressDtoConverter::convertToAddressDto)
+                .collect(Collectors.toList());
+    }
 
-        userRepository.findAll().forEach(user ->{
-            userRepository.findById(user.getId());
-        });
+    public List<AddressDto> updateUserAddress(Long userId, Long addressId, AddressDto addressDto) {
+        List<Long> userAddressesId = this.findUserByIdOrElseThrow(userId).getAddresses().stream()
+                .map(Address::getId)
+                .toList();
+        if (userAddressesId.isEmpty() || ! userAddressesId.toString().contains(addressId.toString())) {
+            throw new DataNotFoundException("User Address not found by id :" + addressId);
+        }
 
-        Long end = new Date().getTime();
-        System.out.println("get " + (end-start));
+        addressService.updateAddress(addressId, addressDto);
+        return getUserAddress(userId);
+    }
+
+    public List<AddressDto> deleteUserAddress(Long userId, Long addressId) {
+        User user = this.findUserByIdOrElseThrow(userId);
+        user.getAddresses().removeIf(address -> address.getId().equals(addressId));
+        this.saveUser(user);
+        addressService.deleteAddress(addressId);
+
+        return this.getUserAddress(userId);
     }
 
 }
