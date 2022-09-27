@@ -3,6 +3,7 @@ package com.e.commerce.service;
 import com.e.commerce.dto.AddressDto;
 import com.e.commerce.dto.UserDto;
 import com.e.commerce.dto.converter.AddressDtoConverter;
+import com.e.commerce.dto.converter.UserDtoConverter;
 import com.e.commerce.exceptions.DataNotFoundException;
 import com.e.commerce.model.Address;
 import com.e.commerce.model.User;
@@ -16,21 +17,26 @@ import java.util.stream.Collectors;
 @Service
 public class UserService {
 
-private  final UserRepository userRepository;
+private final UserRepository userRepository;
 
 private final AddressService addressService;
 
 private final AddressDtoConverter addressDtoConverter;
 
-    public UserService(UserRepository userRepository, AddressService addressService, AddressDtoConverter addressDtoConverter) {
+private final UserDtoConverter userDtoConverter;
+
+    public UserService(UserRepository userRepository, AddressService addressService, AddressDtoConverter addressDtoConverter, UserDtoConverter userDtoConverter) {
         this.userRepository = userRepository;
         this.addressService = addressService;
         this.addressDtoConverter = addressDtoConverter;
+        this.userDtoConverter = userDtoConverter;
     }
 
+
     public UserDto createAndSaveUser(UserDto userDto) {
-        User savedUser = this.saveUser(new User(userDto));
-        return new UserDto(savedUser);
+        User newUser = userDtoConverter.createNewUserFromUserDto(userDto);
+        User savedUser = this.saveUser(newUser);
+        return userDtoConverter.convertFromUserToUserDto(savedUser);
     }
 
     public User saveUser(User user) {
@@ -38,19 +44,18 @@ private final AddressDtoConverter addressDtoConverter;
     }
 
     public UserDto getUserAsDto(Long userId) {
-        return new UserDto(this.findUserByIdOrElseThrow(userId));
+        return userDtoConverter.convertFromUserToUserDto(this.findUserByIdOrElseThrow(userId));
     }
 
     public List<UserDto> getAllUser() {
         return userRepository.findAll().stream()
-                .map(UserDto::new)
+                .map(userDtoConverter::convertFromUserToUserDto)
                 .collect(Collectors.toList());
     }
 
     public User findUserByIdOrElseThrow(Long userId) {
         return userRepository.findById(userId)
-                .orElseThrow(
-                        () ->  new DataNotFoundException("User not found by id :" + userId));
+                .orElseThrow( () ->  new DataNotFoundException("User not found by id :" + userId));
     }
 
     public UserDto updateUser(Long userId, UserDto userDto) {
@@ -61,7 +66,7 @@ private final AddressDtoConverter addressDtoConverter;
         user.setEmail(userDto.getEmail());
         user.setPhoneNumber(userDto.getPhoneNumber());
 
-        return new UserDto(this.saveUser(user));
+        return userDtoConverter.convertFromUserToUserDto(this.saveUser(user));
     }
 
     public User deleteUser(Long userId) {
@@ -74,10 +79,10 @@ private final AddressDtoConverter addressDtoConverter;
 
         User user = this.findUserByIdOrElseThrow(userId);
 
-        List<Address> userAddresses = user.getAddresses();
+        List<Address> userAddresses = new ArrayList<>();
 
-        if (userAddresses == null) {
-            userAddresses = new ArrayList<>();
+        if (user.getAddresses() != null) {
+            userAddresses.addAll(user.getAddresses());
         }
 
         Address savedAddress = addressService.createAndSaveAddress(addressDto);
@@ -96,23 +101,25 @@ private final AddressDtoConverter addressDtoConverter;
                 .collect(Collectors.toList());
     }
 
-    public List<AddressDto> updateUserAddress(Long userId, Long addressId, AddressDto addressDto) {
+    public AddressDto updateUserAddress(Long userId, Long addressId, AddressDto addressDto) {
         List<Long> userAddressesId = this.findUserByIdOrElseThrow(userId).getAddresses().stream()
                 .map(Address::getId)
                 .toList();
+
         if (userAddressesId.isEmpty() || ! userAddressesId.toString().contains(addressId.toString())) {
             throw new DataNotFoundException("User Address not found by id :" + addressId);
         }
 
-        addressService.updateAddress(addressId, addressDto);
-        return getUserAddress(userId);
+        return addressDtoConverter.convertToAddressDto(addressService.updateAddress(addressId, addressDto));
     }
 
     public List<AddressDto> deleteUserAddress(Long userId, Long addressId) {
         User user = this.findUserByIdOrElseThrow(userId);
-        user.getAddresses().removeIf(address -> address.getId().equals(addressId));
-        this.saveUser(user);
-        addressService.deleteAddress(addressId);
+        if (user.getAddresses() == null) {
+            user.getAddresses().removeIf(address -> address.getId().equals(addressId));
+            this.saveUser(user);
+            addressService.deleteAddress(addressId);
+        }
 
         return this.getUserAddress(userId);
     }

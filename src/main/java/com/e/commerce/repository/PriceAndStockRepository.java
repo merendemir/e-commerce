@@ -10,7 +10,7 @@ import java.util.Optional;
 
 public interface PriceAndStockRepository extends JpaRepository<PriceAndStock, Long> {
 
-    Optional<PriceAndStock> findBySellerAndAndProduct(Seller seller, Product product);
+    Optional<PriceAndStock> findBySellerAndProduct(Seller seller, Product product);
 
     List<PriceAndStock> findAllByProduct(Product product);
 }

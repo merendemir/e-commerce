@@ -36,7 +36,7 @@ public class PriceAndStockService {
     }
 
     public Optional<PriceAndStock> findPriceAndStockByProductAndSeller(Seller seller, Product product) {
-        return priceAndStockRepository.findBySellerAndAndProduct(seller, product);
+        return priceAndStockRepository.findBySellerAndProduct(seller, product);
     }
 
     public List<PriceAndStock> findAllByProduct(Product product) {

@@ -3,6 +3,7 @@ package com.e.commerce.dto;
 import com.e.commerce.model.User;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotNull;
@@ -11,6 +12,7 @@ import javax.validation.constraints.NotNull;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@EqualsAndHashCode
 public class UserDto {
 
     @NotNull
@@ -25,10 +27,4 @@ public class UserDto {
     @NotNull
     private String phoneNumber;
 
-    public UserDto(User user) {
-        this.name = user.getName();
-        this.lastName = user.getLastName();
-        this.email = user.getEmail();
-        this.phoneNumber = user.getPhoneNumber();
-    }
 }

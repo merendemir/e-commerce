@@ -1,9 +1,7 @@
 package com.e.commerce.model;
 
 import com.e.commerce.dto.UserDto;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -45,4 +43,5 @@ public class User {
         this.email = userDto.getEmail();
         this.phoneNumber = userDto.getPhoneNumber();
     }
+
 }
