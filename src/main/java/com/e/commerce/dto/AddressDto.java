@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.NotBlank;
 
 @Data
 @NoArgsConstructor
@@ -13,16 +13,16 @@ public class AddressDto {
 
     private String title;
 
-    @NotNull
+    @NotBlank
     private String country;
 
-    @NotNull
+    @NotBlank
     private String city;
 
-    @NotNull
+    @NotBlank
     private String district;
 
-    @NotNull
+    @NotBlank
     private String openAddress;
 
 }

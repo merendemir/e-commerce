@@ -2,34 +2,28 @@ package com.e.commerce.configuration;
 
 import io.swagger.v3.oas.models.Components;
 import io.swagger.v3.oas.models.OpenAPI;
-import io.swagger.v3.oas.models.info.Contact;
-import io.swagger.v3.oas.models.info.Info;
-import io.swagger.v3.oas.models.media.StringSchema;
-import io.swagger.v3.oas.models.parameters.HeaderParameter;
-import io.swagger.v3.oas.models.parameters.Parameter;
 import io.swagger.v3.oas.models.security.SecurityRequirement;
 import io.swagger.v3.oas.models.security.SecurityScheme;
-import io.swagger.v3.oas.models.servers.Server;
-import org.springdoc.core.customizers.OpenApiCustomiser;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-
-import java.util.Collections;
+import org.springframework.http.HttpHeaders;
 
 @Configuration
 public class OpenApi3Config {
 
+    //https://www.baeldung.com/openapi-jwt-authentication
     @Bean
-    public OpenAPI openAPI() {
+    public OpenAPI customizeOpenAPI() {
+
+        final String securitySchemeName = HttpHeaders.AUTHORIZATION;
+
         return new OpenAPI()
+                .addSecurityItem(new SecurityRequirement().addList(securitySchemeName))
                 .components(new Components()
-                        .addSecuritySchemes("Authorization", new SecurityScheme()
-                                .name("Authorization")
+                        .addSecuritySchemes(securitySchemeName, new SecurityScheme()
+                                .name(securitySchemeName)
                                 .in(SecurityScheme.In.HEADER)
-                                .type(SecurityScheme.Type.APIKEY)))
-                .security(Collections.singletonList(new SecurityRequirement().addList("Authorization")));
+                                .type(SecurityScheme.Type.APIKEY)));
 
     }
-
 }

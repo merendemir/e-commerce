@@ -34,7 +34,7 @@ public class JWTUtil {
 
     public String generateToken(Long id, String email, Role role) {
         return JWT.create()
-                .withClaim(role.getName() + "Id", id)
+                .withClaim(role.getForClaims(), id)
                 .withClaim("email", email)
                 .withClaim("role", role.toString())
                 .withExpiresAt(this.getExpiresDateByRole(role))

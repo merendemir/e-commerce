@@ -2,7 +2,7 @@ package com.e.commerce.dto;
 
 import lombok.*;
 
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.NotBlank;
 
 
 @Data
@@ -12,16 +12,16 @@ import javax.validation.constraints.NotNull;
 @Builder
 public class UserDto {
 
-    @NotNull
+    @NotBlank
     private String name;
 
-    @NotNull
+    @NotBlank
     private String lastName;
 
-    @NotNull
+    @NotBlank
     private String email;
 
-    @NotNull
+    @NotBlank
     private String phoneNumber;
 
 }

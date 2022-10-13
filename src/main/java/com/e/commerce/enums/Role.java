@@ -5,11 +5,11 @@ public enum Role {
     SELLER,
     ADMIN;
 
-    public String getName() {
+    public String getForClaims() {
         return switch (this) {
-            case USER -> "user";
-            case SELLER -> "seller";
-            case ADMIN -> "admin";
+            case USER -> "userId";
+            case SELLER -> "sellerId";
+            case ADMIN -> "adminId";
         };
     }
 
