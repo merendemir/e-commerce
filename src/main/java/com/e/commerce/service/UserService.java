@@ -48,10 +48,8 @@ private final UserDtoConverter userDtoConverter;
         return userDtoConverter.convertFromUserToUserDto(this.findUserByIdOrElseThrow(userId));
     }
 
-    public List<UserDto> getAllUser() {
-        return userRepository.findAll().stream()
-                .map(userDtoConverter::convertFromUserToUserDto)
-                .collect(Collectors.toList());
+    public List<User> getAllUserForAdmin() {
+        return userRepository.findAll();
     }
 
     public User findUserByIdOrElseThrow(Long userId) {

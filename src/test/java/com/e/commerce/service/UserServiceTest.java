@@ -106,20 +106,19 @@ public class UserServiceTest {
     }
 
     @Test
-    public void whenGetAllUserAndRepositoryDoesNotHaveUser_thenItShouldReturnEmptyList() {
+    public void whenGetAllUserForAdminAndRepositoryDoesNotHaveUser_thenItShouldReturnEmptyList() {
 
         Mockito.when(userRepository.findAll()).thenReturn(new ArrayList<>());
 
-        List<UserDto> result = userService.getAllUser();
+        List<User> result = userService.getAllUserForAdmin();
 
         Assert.assertEquals(result, new ArrayList<>());
 
         Mockito.verify(userRepository).findAll();
-        Mockito.verifyNoInteractions(userDtoConverter);
     }
 
     @Test
-    public void whenGetAllUserAndRepositoryHaveUser_thenItShouldReturnUserDtoList() {
+    public void whenGetAllUserForAdminAndRepositoryHaveUser_thenItShouldReturnUserDtoList() {
         UserDto userDto = this.generateUserDto();
         UserDto userDto2 = this.generateUserDto2();
 
@@ -127,16 +126,12 @@ public class UserServiceTest {
         User user2 = this.generateUserFromUserDto(userDto2);
 
         Mockito.when(userRepository.findAll()).thenReturn(List.of(user, user2));
-        Mockito.when(userDtoConverter.convertFromUserToUserDto(user)).thenReturn(userDto);
-        Mockito.when(userDtoConverter.convertFromUserToUserDto(user2)).thenReturn(userDto2);
 
-        List<UserDto> result = userService.getAllUser();
+        List<User> result = userService.getAllUserForAdmin();
 
-        Assert.assertEquals(result, List.of(userDto, userDto2));
+        Assert.assertEquals(result, List.of(user, user2));
 
         Mockito.verify(userRepository).findAll();
-        Mockito.verify(userDtoConverter).convertFromUserToUserDto(user);
-        Mockito.verify(userDtoConverter).convertFromUserToUserDto(user2);
     }
 
     @Test

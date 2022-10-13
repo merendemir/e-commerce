@@ -23,9 +23,20 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 				.body(errors);
 	}
 
+	@ExceptionHandler(Exception.class)
+	public ResponseEntity<Object> handleException (DataNotFoundException e) {
+		e.printStackTrace();
+		return ResponseEntity.badRequest().body("something went wrong");
+	}
+
 	@ExceptionHandler(DataNotFoundException.class)
 	public ResponseEntity<Object> dataNotFoundException (DataNotFoundException e) {
 		return ResponseEntity.badRequest().body(e.getMessage());
+	}
+
+	@ExceptionHandler(DataNotAcceptableException.class)
+	public ResponseEntity<Object> dataNotAcceptableException (DataNotAcceptableException e) {
+		return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body(e.getMessage());
 	}
 
 	@ExceptionHandler(GenericException.class)

@@ -4,36 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4c2eb0d3-07a4-4c5b-83b9-d24f2a0e43ea" name="Changes" comment="Address, seller, product, PriceAndStock service impl">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/e/commerce/configuration/OpenApi3Config.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/e/commerce/controller/AuthController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/e/commerce/dto/PasswordChangeRequestDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/e/commerce/dto/UserCreateRequestDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/e/commerce/enums/Role.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/e/commerce/exceptions/GenericException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/e/commerce/exceptions/JWTAccessDeniedHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/e/commerce/exceptions/JwtAuthenticationEntryPoint.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/e/commerce/security/JwtFilter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/e/commerce/security/SecurityConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/e/commerce/security/UserDetailsServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/e/commerce/service/AuthService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/e/commerce/util/JWTUtil.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/e/commerce/util/PasswordUtil.java" afterDir="false" />
+    <list default="true" id="4c2eb0d3-07a4-4c5b-83b9-d24f2a0e43ea" name="Changes" comment="jwt security impl">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/e/commerce/exceptions/DataNotAcceptableException.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/e/commerce/controller/ProductController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/e/commerce/controller/ProductController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/e/commerce/configuration/OpenApi3Config.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/e/commerce/configuration/OpenApi3Config.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/e/commerce/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/e/commerce/controller/UserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/e/commerce/dto/UserDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/e/commerce/dto/UserDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/e/commerce/dto/converter/UserDtoConverter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/e/commerce/dto/converter/UserDtoConverter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/e/commerce/exceptions/DataAlreadyExistsException.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/e/commerce/enums/Role.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/e/commerce/enums/Role.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/e/commerce/exceptions/GlobalExceptionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/e/commerce/exceptions/GlobalExceptionHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/e/commerce/model/Seller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/e/commerce/model/Seller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/e/commerce/model/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/e/commerce/model/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/e/commerce/repository/SellerRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/e/commerce/repository/SellerRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/e/commerce/repository/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/e/commerce/repository/UserRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/e/commerce/service/SellerService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/e/commerce/service/SellerService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/e/commerce/exceptions/JWTAccessDeniedHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/e/commerce/exceptions/JWTAccessDeniedHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/e/commerce/exceptions/JwtAuthenticationEntryPoint.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/e/commerce/exceptions/JwtAuthenticationEntryPoint.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/e/commerce/security/JwtFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/e/commerce/security/JwtFilter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/e/commerce/security/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/e/commerce/security/SecurityConfig.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/e/commerce/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/e/commerce/service/UserService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/e/commerce/util/JWTUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/e/commerce/util/JWTUtil.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/com/e/commerce/service/UserServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/e/commerce/service/UserServiceTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -101,11 +84,11 @@
       <recent name="$PROJECT_DIR$/src/main/resources" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.e.commerce.exceptions" />
       <recent name="com.e.commerce.configuration" />
       <recent name="com.e.commerce.security" />
       <recent name="com.e.commerce.enums" />
       <recent name="com.e.commerce.util" />
-      <recent name="com.e.commerce.exceptions" />
     </key>
   </component>
   <component name="RunManager" selected="Spring Boot.CommerceApplication">
@@ -179,7 +162,7 @@
       <workItem from="1665386909754" duration="598000" />
       <workItem from="1665482160249" duration="153000" />
       <workItem from="1665578775906" duration="1685000" />
-      <workItem from="1665649143980" duration="19021000" />
+      <workItem from="1665649143980" duration="25758000" />
     </task>
     <task id="LOCAL-00001" summary="initial commit">
       <created>1663590473448</created>
@@ -209,7 +192,14 @@
       <option name="project" value="LOCAL" />
       <updated>1663755095917</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="jwt security impl">
+      <created>1665670572396</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1665670572396</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -231,6 +221,12 @@
     <MESSAGE value="initial commit" />
     <MESSAGE value="user crud operation" />
     <MESSAGE value="Address, seller, product, PriceAndStock service impl" />
-    <option name="LAST_COMMIT_MESSAGE" value="Address, seller, product, PriceAndStock service impl" />
+    <MESSAGE value="jwt security impl" />
+    <option name="LAST_COMMIT_MESSAGE" value="jwt security impl" />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/commerce$UserServiceTest.ic" NAME="UserServiceTest Coverage Results" MODIFIED="1665677109542" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>com.e.commerce.service.*</FILTER>
+    </SUITE>
   </component>
 </project>

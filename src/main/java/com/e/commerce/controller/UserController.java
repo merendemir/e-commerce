@@ -33,8 +33,8 @@ public class UserController {
 
 	@PreAuthorize("hasAuthority('ADMIN')")
 	@GetMapping("/all")
-	public ResponseEntity<Object> getAllUser() {
-		return ResponseEntity.ok(userService.getAllUser());
+	public ResponseEntity<Object> getAllUserForAdmin() {
+		return ResponseEntity.ok(userService.getAllUserForAdmin());
 	}
 
 	@PostMapping("/register")
