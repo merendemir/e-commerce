@@ -9,5 +9,7 @@ public interface SellerRepository extends JpaRepository<Seller, Long> {
 
     Optional<Seller> findByName(String name);
 
+    Optional<Seller> findByEmail(String email);
+
     Boolean existsByName(String name);
 }

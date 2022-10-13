@@ -1,9 +1,7 @@
 package com.e.commerce.dto.converter;
 
 import com.e.commerce.dto.AddressDto;
-import com.e.commerce.dto.SellerDto;
 import com.e.commerce.model.Address;
-import com.e.commerce.model.Seller;
 import org.springframework.stereotype.Component;
 
 @Component

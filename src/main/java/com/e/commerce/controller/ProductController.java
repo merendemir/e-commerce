@@ -48,7 +48,6 @@ public class ProductController {
 		return ResponseEntity.ok(productService.findAllProductByBrand(brand));
 	}
 
-
 	@GetMapping("/by_category")
 	public ResponseEntity<Object> findAllProductByCategory(@RequestParam ProductCategory productCategory) {
 		return ResponseEntity.ok(productService.findAllProductByCategory(productCategory));

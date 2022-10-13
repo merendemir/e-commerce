@@ -9,3 +9,9 @@ spring:
 springdoc:
   swagger-ui:
     path: /swagger-ui.html
+
+jwt:
+  key: secret_key
+  user_expires_minute: 15
+  admin_expires_minute: 2400
+  seller_expires_minute: 1200

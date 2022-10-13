@@ -1,13 +1,13 @@
 package com.e.commerce.service;
 
 import com.e.commerce.dto.SellerDto;
-import com.e.commerce.dto.converter.AddressDtoConverter;
 import com.e.commerce.dto.converter.SellerDtoConverter;
-import com.e.commerce.exceptions.DataAlreadyExistsException;
 import com.e.commerce.exceptions.DataNotFoundException;
+import com.e.commerce.exceptions.GenericException;
 import com.e.commerce.model.Address;
 import com.e.commerce.model.Seller;
 import com.e.commerce.repository.SellerRepository;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -30,7 +30,7 @@ private final SellerDtoConverter sellerDtoConverter;
 
     public SellerDto createAndSaveSeller(SellerDto sellerDto) {
         if (sellerRepository.existsByName(sellerDto.getName())) {
-            throw new DataAlreadyExistsException("There is already a seller with this name: " + sellerDto.getName());
+            throw new GenericException(HttpStatus.BAD_REQUEST, "There is already a seller with this name: " + sellerDto.getName());
         }
 
         sellerDto.getSellerAddress().setTitle("official");
@@ -67,6 +67,12 @@ private final SellerDtoConverter sellerDtoConverter;
         return sellerRepository.findById(sellerId)
                 .orElseThrow(
                         () ->  new DataNotFoundException("Seller not found by id :" + sellerId));
+    }
+
+    public Seller findSellerByEmailOrElseThrow(String email) {
+        return sellerRepository.findByEmail(email)
+                .orElseThrow(
+                        () ->  new DataNotFoundException("Seller not found by email :" + email));
     }
 
     public Seller findSellerByNameOrElseThrow(String name) {

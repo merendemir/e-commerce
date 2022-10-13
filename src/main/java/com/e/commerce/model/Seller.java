@@ -28,7 +28,10 @@ public class Seller {
     @Column(unique = true)
     private String name;
 
+    @Column(unique = true)
     private String email;
+
+    private String password;
 
     private String phoneNumber;
 

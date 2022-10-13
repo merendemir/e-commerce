@@ -1,20 +1,28 @@
 package com.e.commerce.service;
 
 import com.e.commerce.dto.AddressDto;
+import com.e.commerce.dto.PasswordChangeRequestDto;
+import com.e.commerce.dto.UserCreateRequestDto;
 import com.e.commerce.dto.UserDto;
 import com.e.commerce.dto.converter.AddressDtoConverter;
 import com.e.commerce.dto.converter.UserDtoConverter;
 import com.e.commerce.exceptions.DataNotFoundException;
+import com.e.commerce.exceptions.GenericException;
 import com.e.commerce.model.Address;
 import com.e.commerce.model.User;
 import com.e.commerce.repository.UserRepository;
+import com.e.commerce.util.PasswordUtil;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Service
+@RequiredArgsConstructor
 public class UserService {
 
 private final UserRepository userRepository;
@@ -25,18 +33,11 @@ private final AddressDtoConverter addressDtoConverter;
 
 private final UserDtoConverter userDtoConverter;
 
-    public UserService(UserRepository userRepository, AddressService addressService, AddressDtoConverter addressDtoConverter, UserDtoConverter userDtoConverter) {
-        this.userRepository = userRepository;
-        this.addressService = addressService;
-        this.addressDtoConverter = addressDtoConverter;
-        this.userDtoConverter = userDtoConverter;
-    }
 
-
-    public UserDto createAndSaveUser(UserDto userDto) {
-        User newUser = userDtoConverter.createNewUserFromUserDto(userDto);
-        User savedUser = this.saveUser(newUser);
-        return userDtoConverter.convertFromUserToUserDto(savedUser);
+    public UserDto createAndSaveUser(UserCreateRequestDto userCreateRequestDto) {
+        return userDtoConverter.convertFromUserToUserDto(
+                this.saveUser(
+                        userDtoConverter.createNewUserFromUserCreateRequestDto(userCreateRequestDto)));
     }
 
     public User saveUser(User user) {
@@ -55,7 +56,12 @@ private final UserDtoConverter userDtoConverter;
 
     public User findUserByIdOrElseThrow(Long userId) {
         return userRepository.findById(userId)
-                .orElseThrow( () ->  new DataNotFoundException("User not found by id :" + userId));
+                .orElseThrow(() ->  new DataNotFoundException("User not found by id :" + userId));
+    }
+
+    public User findUserByEmailOrElseThrow(String email) {
+        return userRepository.findByEmail(email)
+                .orElseThrow(() ->  new DataNotFoundException("User not found by email :" + email));
     }
 
     public UserDto updateUser(Long userId, UserDto userDto) {
@@ -122,6 +128,22 @@ private final UserDtoConverter userDtoConverter;
         }
 
         return this.getUserAddress(userId);
+    }
+
+    public void changeUserPassword(Long userId, PasswordChangeRequestDto passwordChangeRequestDto) {
+        if (!Objects.equals(passwordChangeRequestDto.getNewPassword(), passwordChangeRequestDto.getNewPasswordRepeat())) {
+            throw new GenericException(HttpStatus.BAD_REQUEST, "Your new password does not match the password repetition.");
+        }
+
+        User user = this.findUserByIdOrElseThrow(userId);
+
+        if (PasswordUtil.isPasswordMatch(passwordChangeRequestDto.getOldPassword(), user.getPassword())) {
+            user.setPassword(PasswordUtil.encodePassword(passwordChangeRequestDto.getNewPassword()));
+            this.saveUser(user);
+        } else {
+            throw new GenericException(HttpStatus.BAD_REQUEST, "Your old password is wrong.");
+        }
+
     }
 
 }

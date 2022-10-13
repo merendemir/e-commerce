@@ -1,9 +1,11 @@
 package com.e.commerce.service;
 
 import com.e.commerce.dto.AddressDto;
+import com.e.commerce.dto.UserCreateRequestDto;
 import com.e.commerce.dto.UserDto;
 import com.e.commerce.dto.converter.AddressDtoConverter;
 import com.e.commerce.dto.converter.UserDtoConverter;
+import com.e.commerce.enums.Role;
 import com.e.commerce.exceptions.DataNotFoundException;
 import com.e.commerce.model.Address;
 import com.e.commerce.model.User;
@@ -18,7 +20,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
-import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.times;
 
 public class UserServiceTest {
@@ -49,18 +50,19 @@ public class UserServiceTest {
 
     @Test
     public void whenCreateAndSaveUserCalled_thenItShouldReturnUserDto() {
+        UserCreateRequestDto userCreateRequestDto = this.generateUserCreateRequestDto();
         UserDto userDto = this.generateUserDto();
-        User user = this.generateUserFromUserDto(userDto);
+        User user = this.generateUserFromUserCreateRequestDto(userCreateRequestDto);
 
-        Mockito.when(userDtoConverter.createNewUserFromUserDto(userDto)).thenReturn(user);
+        Mockito.when(userDtoConverter.createNewUserFromUserCreateRequestDto(userCreateRequestDto)).thenReturn(user);
         Mockito.when(userRepository.save(user)).thenReturn(user);
         Mockito.when(userDtoConverter.convertFromUserToUserDto(user)).thenReturn(userDto);
 
-        UserDto result = userService.createAndSaveUser(userDto);
+        UserDto result = userService.createAndSaveUser(userCreateRequestDto);
 
         Assert.assertEquals(userDto, result);
 
-        Mockito.verify(userDtoConverter).createNewUserFromUserDto(userDto);
+        Mockito.verify(userDtoConverter).createNewUserFromUserCreateRequestDto(userCreateRequestDto);
         Mockito.verify(userRepository).save(user);
         Mockito.verify(userDtoConverter).convertFromUserToUserDto(user);
     }
@@ -354,16 +356,30 @@ public class UserServiceTest {
 
 
 
+    private UserCreateRequestDto generateUserCreateRequestDto() {
+        return new UserCreateRequestDto(
+                "test",
+                "test",
+                "test@gmail.com",
+                "9054",
+                "1234"
+        );
+    }
 
-
-
-
-
-
-
-
-
-
+    private User generateUserFromUserCreateRequestDto(UserCreateRequestDto userDto) {
+        return new User(
+                135L,
+                new Date(100),
+                new Date(100),
+                userDto.getName(),
+                userDto.getLastName(),
+                userDto.getEmail(),
+                userDto.getPhoneNumber(),
+                userDto.getPassword(),
+                Role.USER,
+                null
+        );
+    }
 
     private UserDto generateUserDto() {
         return new UserDto(
@@ -383,6 +399,8 @@ public class UserServiceTest {
                 userDto.getLastName(),
                 userDto.getEmail(),
                 userDto.getPhoneNumber(),
+                null,
+                Role.USER,
                 null
         );
     }
@@ -396,6 +414,8 @@ public class UserServiceTest {
                 userDto.getLastName(),
                 userDto.getEmail(),
                 userDto.getPhoneNumber(),
+                null,
+                Role.USER,
                 addresses
         );
     }
