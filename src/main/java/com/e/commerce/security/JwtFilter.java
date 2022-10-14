@@ -1,5 +1,6 @@
 package com.e.commerce.security;
 
+import com.auth0.jwt.exceptions.SignatureVerificationException;
 import com.auth0.jwt.exceptions.TokenExpiredException;
 import com.e.commerce.util.JWTUtil;
 import lombok.RequiredArgsConstructor;
@@ -42,6 +43,8 @@ public class JwtFilter extends OncePerRequestFilter {
             filterChain.doFilter(request, response);
         } catch (TokenExpiredException e) {
             sendError(response, "Session expired please login again");
+        } catch (SignatureVerificationException e ) {
+            sendError(response, "Invalid Token");
         } catch(Exception e) {
             log.error("doFilterInternal error -> " + e.getMessage());
             e.printStackTrace();

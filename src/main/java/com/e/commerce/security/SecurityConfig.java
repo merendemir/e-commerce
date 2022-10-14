@@ -1,8 +1,6 @@
 package com.e.commerce.security;
 
 
-//import com.e.commerce.exceptions.JWTAccessDeniedHandler;
-//import com.e.commerce.exceptions.JwtAuthenticationEntryPoint;
 import com.e.commerce.exceptions.JWTAccessDeniedHandler;
 import com.e.commerce.exceptions.JwtAuthenticationEntryPoint;
 import lombok.RequiredArgsConstructor;
@@ -13,7 +11,6 @@ import org.springframework.security.config.annotation.authentication.configurati
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
@@ -41,6 +38,7 @@ public class SecurityConfig {
                 .csrf().disable()
                 .cors().and()
                 .authorizeRequests(auth -> {
+                    auth.antMatchers(AUTH_WHITELIST).permitAll();
                     auth.anyRequest().authenticated();
                 })
                 .formLogin().disable()
@@ -54,16 +52,15 @@ public class SecurityConfig {
                 .build();
     }
 
-    @Bean
-    public WebSecurityCustomizer webSecurityCustomizer() {
-        return (web) -> web.ignoring().antMatchers(
-                "/api/v1/health_check",
-                "/swagger-ui/index.html",
-                "/v3/api-docs/**",
-                "/api/v1/auth/login",
-                "/api/v1/auth/seller/login",
-                "/api/v1/user/register"
-        );
-    }
+    private static final String[] AUTH_WHITELIST = {
+            // -- swagger ui
+            "/swagger-ui/**",
+            "/v3/api-docs/**",
+
+            "/api/v1/health_check",
+            "/api/v1/auth/login",
+            "/api/v1/auth/seller/login",
+            "/api/v1/user/register"
+    };
 
 }
