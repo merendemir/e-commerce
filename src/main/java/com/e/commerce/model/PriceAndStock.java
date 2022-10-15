@@ -21,6 +21,7 @@ public class PriceAndStock {
 
     private Long stock;
 
+    @ToString.Exclude
     @ManyToOne(fetch = FetchType.LAZY)
     private Product product;
 

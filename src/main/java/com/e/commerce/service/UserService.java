@@ -141,7 +141,6 @@ private final UserDtoConverter userDtoConverter;
         } else {
             throw new GenericException(HttpStatus.BAD_REQUEST, "Your old password is wrong.");
         }
-
     }
 
 }

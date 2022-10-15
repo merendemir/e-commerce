@@ -34,11 +34,6 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 		return ResponseEntity.badRequest().body(e.getMessage());
 	}
 
-	@ExceptionHandler(DataNotAcceptableException.class)
-	public ResponseEntity<Object> dataNotAcceptableException (DataNotAcceptableException e) {
-		return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body(e.getMessage());
-	}
-
 	@ExceptionHandler(GenericException.class)
 	public ResponseEntity<?> handleException(GenericException e) {
 		return ResponseEntity

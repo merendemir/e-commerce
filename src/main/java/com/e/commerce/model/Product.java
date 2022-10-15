@@ -22,6 +22,7 @@ public class Product {
 
     private String name;
 
+    @Enumerated(EnumType.STRING)
     private ProductCategory productCategory;
 
     private String brand;

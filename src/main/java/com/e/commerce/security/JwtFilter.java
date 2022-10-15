@@ -2,8 +2,6 @@ package com.e.commerce.security;
 
 import com.auth0.jwt.exceptions.SignatureVerificationException;
 import com.auth0.jwt.exceptions.TokenExpiredException;
-import com.e.commerce.util.JWTUtil;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.json.JSONObject;
 import org.springframework.http.HttpHeaders;
@@ -21,20 +19,20 @@ import java.io.IOException;
 
 @Component
 @Slf4j
-@RequiredArgsConstructor
 public class JwtFilter extends OncePerRequestFilter {
 
     private final UserDetailsServiceImpl jwtUserDetailsService;
-    private final JWTUtil jwtUtil;
+
+    public JwtFilter(UserDetailsServiceImpl jwtUserDetailsService) {
+        this.jwtUserDetailsService = jwtUserDetailsService;
+    }
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws IOException {
         String token = request.getHeader(HttpHeaders.AUTHORIZATION);
         try {
             if (token != null && !token.isBlank()) {
-                String id = String.valueOf(jwtUtil.getIdFromToken(token));
-
-                UserDetails userDetails = jwtUserDetailsService.loadUserByUsername(id);
+                UserDetails userDetails = jwtUserDetailsService.loadUserByUsername(token);
                 UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(null, null, userDetails.getAuthorities());
                 authenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
                 SecurityContextHolder.getContext().setAuthentication(authenticationToken);

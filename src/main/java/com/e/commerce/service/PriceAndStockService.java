@@ -39,8 +39,12 @@ public class PriceAndStockService {
         return priceAndStockRepository.findBySellerAndProduct(seller, product);
     }
 
-    public List<PriceAndStock> findAllByProduct(Product product) {
-        return priceAndStockRepository.findAllByProduct(product);
+    public List<PriceAndStock> findAllByProductId(Long productId) {
+        return priceAndStockRepository.findAllByProduct_Id(productId);
+    }
+
+    public List<PriceAndStock> findAllBySellerId(Long sellerId) {
+        return priceAndStockRepository.findAllBySeller_Id(sellerId);
     }
 
     public PriceAndStock updatePriceAndStock(Long priceAndStockId, BigDecimal price, Long stock) {

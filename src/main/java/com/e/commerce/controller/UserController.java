@@ -27,7 +27,7 @@ public class UserController {
 
 	@GetMapping
 	public ResponseEntity<Object> getUser(HttpServletRequest request) {
-		Long userId = jwtUtil.getUserIdByToken(request.getHeader(HttpHeaders.AUTHORIZATION));
+		Long userId = jwtUtil.getUserIdFromToken(request.getHeader(HttpHeaders.AUTHORIZATION));
 		return ResponseEntity.ok(userService.getUserAsDto(userId));
 	}
 
@@ -44,7 +44,7 @@ public class UserController {
 
 	@PutMapping()
 	public ResponseEntity<Object> updateUser(HttpServletRequest request, @RequestBody UserDto userDto) {
-		Long userId = jwtUtil.getUserIdByToken(request.getHeader(HttpHeaders.AUTHORIZATION));
+		Long userId = jwtUtil.getUserIdFromToken(request.getHeader(HttpHeaders.AUTHORIZATION));
 		return ResponseEntity.ok(userService.updateUser(userId, userDto));
 	}
 
@@ -52,7 +52,7 @@ public class UserController {
 	@DeleteMapping
 	public ResponseEntity<Object> deleteUser(HttpServletRequest request) {
 
-		Long userId = jwtUtil.getUserIdByToken(request.getHeader(HttpHeaders.AUTHORIZATION));
+		Long userId = jwtUtil.getUserIdFromToken(request.getHeader(HttpHeaders.AUTHORIZATION));
 		return ResponseEntity.ok(userService.deleteUser(userId));
 	}
 
@@ -64,7 +64,7 @@ public class UserController {
 	@PostMapping("/addresses")
 	public ResponseEntity<Object> saveUserAddresses(HttpServletRequest request,
 													@RequestBody AddressDto addressDto) {
-		Long userId = jwtUtil.getUserIdByToken(request.getHeader(HttpHeaders.AUTHORIZATION));
+		Long userId = jwtUtil.getUserIdFromToken(request.getHeader(HttpHeaders.AUTHORIZATION));
 		return ResponseEntity.ok(userService.saveUserAddress(userId, addressDto));
 	}
 
@@ -73,14 +73,14 @@ public class UserController {
 													  @RequestParam Long addressId,
 													  @RequestBody AddressDto addressDto) {
 
-		Long userId = jwtUtil.getUserIdByToken(request.getHeader(HttpHeaders.AUTHORIZATION));
+		Long userId = jwtUtil.getUserIdFromToken(request.getHeader(HttpHeaders.AUTHORIZATION));
 		return ResponseEntity.ok(userService.updateUserAddress(userId, addressId, addressDto));
 	}
 
 	@DeleteMapping("/addresses")
 	public ResponseEntity<Object> deleteUserAddresses(HttpServletRequest request,
 													  @RequestParam Long addressId) {
-		Long userId = jwtUtil.getUserIdByToken(request.getHeader(HttpHeaders.AUTHORIZATION));
+		Long userId = jwtUtil.getUserIdFromToken(request.getHeader(HttpHeaders.AUTHORIZATION));
 		return ResponseEntity.ok(userService.deleteUserAddress(userId, addressId));
 	}
 
@@ -88,7 +88,7 @@ public class UserController {
 	public ResponseEntity<Object> changeUserPassword(HttpServletRequest request,
 													 @RequestBody PasswordChangeRequestDto passwordChangeRequestDto) {
 
-		Long userId = jwtUtil.getUserIdByToken(request.getHeader(HttpHeaders.AUTHORIZATION));
+		Long userId = jwtUtil.getUserIdFromToken(request.getHeader(HttpHeaders.AUTHORIZATION));
 		userService.changeUserPassword(userId, passwordChangeRequestDto);
 		return ResponseEntity.ok("your password has been successfully changed");
 	}

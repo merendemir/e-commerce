@@ -11,8 +11,6 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 public class SellerAddNewProductDto {
 
-    private Long sellerId;
-
     private Long productId;
 
     private BigDecimal price;

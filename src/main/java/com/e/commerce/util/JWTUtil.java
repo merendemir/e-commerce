@@ -4,8 +4,8 @@ import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.Claim;
+import com.auth0.jwt.interfaces.DecodedJWT;
 import com.e.commerce.enums.Role;
-import com.e.commerce.exceptions.DataNotAcceptableException;
 import com.e.commerce.exceptions.GenericException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -37,12 +37,21 @@ public class JWTUtil {
                 .withClaim(role.getForClaims(), id)
                 .withClaim("email", email)
                 .withClaim("role", role.toString())
-                .withExpiresAt(this.getExpiresDateByRole(role))
+                .withExpiresAt(this.prepareExpiresDateByRole(role))
                 .sign(Algorithm.HMAC256(KEY.getBytes()));
     }
 
+    public DecodedJWT verifyJWT(String token) {
+        Algorithm algorithm = Algorithm.HMAC256(KEY.getBytes());
+        JWTVerifier verifier = JWT.require(algorithm).acceptExpiresAt(20).build();
+        return verifier.verify(token);
+    }
 
-    private Date getExpiresDateByRole(Role role) {
+    public Map<String, Claim> getClaims(String token) {
+        return JWT.decode(token).getClaims();
+    }
+
+    private Date prepareExpiresDateByRole(Role role) {
         long timeToAdded = switch (role) {
             case USER -> EXPIRES_ACCESS_TOKEN_MINUTE_FOR_USER;
             case ADMIN -> EXPIRES_ACCESS_TOKEN_MINUTE_FOR_ADMIN;
@@ -52,38 +61,22 @@ public class JWTUtil {
         return new Date(System.currentTimeMillis() + (timeToAdded * 60 * 1000));
     }
 
-    public Map<String, Claim> getClaims(String token) {
-        Algorithm algorithm = Algorithm.HMAC256(KEY.getBytes());
-        JWTVerifier verifier = JWT.require(algorithm).acceptExpiresAt(20).build();
-
-        return verifier.verify(token).getClaims();
-    }
-
-    public Long getIdFromToken(String token) {
-        Map<String, Claim> claims = this.getClaims(token);
-
-        String claim = "";
-
-        switch (claims.get("role").asString()) {
-            case "USER" -> claim = "userId";
-            case "SELLER" -> claim = "sellerId";
-            case "ADMIN" -> claim = "adminId";
-        }
-
-        if (claim.equalsIgnoreCase("")) {
-            throw new DataNotAcceptableException("Wrong Token");
-        }
-
-        return claims.get(claim).asLong();
-    }
-
-    public Long getUserIdByToken(String token) {
+    public Long getUserIdFromToken(String token) {
         Claim userId = this.getClaims(token).get("userId");
         if (userId == null) {
             throw new GenericException(HttpStatus.NOT_ACCEPTABLE, "This action is for only users.");
         }
 
-        return Long.parseLong(String.valueOf(userId));
+        return userId.asLong();
+    }
+
+    public Long getSellerIdFromToken(String token) {
+        Claim sellerId = this.getClaims(token).get("sellerId");
+        if (sellerId == null) {
+            throw new GenericException(HttpStatus.NOT_ACCEPTABLE, "This action is for only sellers.");
+        }
+
+        return sellerId.asLong();
     }
 
 

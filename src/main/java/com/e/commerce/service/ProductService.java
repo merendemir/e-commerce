@@ -118,7 +118,7 @@ public class ProductService {
     public Product deleteProduct(Long productId) {
         Product product = this.findProductByIdOrElseThrow(productId);
         productRepository.delete(product);
-        priceAndStockService.deleteAll(priceAndStockService.findAllByProduct(product));
+        priceAndStockService.deleteAll(priceAndStockService.findAllByProductId(product.getId()));
         return product;
     }
 
@@ -148,8 +148,8 @@ public class ProductService {
                 .collect(Collectors.toList());
     }
 
-    public BaseProductDto addNewSellerByProductId(SellerAddNewProductDto sellerAddNewProductDto) {
-        Seller seller = sellerService.findSellerByIdOrElseThrow(sellerAddNewProductDto.getSellerId());
+    public BaseProductDto addNewSellerByProductId(Long sellerId, SellerAddNewProductDto sellerAddNewProductDto) {
+        Seller seller = sellerService.findSellerByIdOrElseThrow(sellerId);
         Product product = this.findProductByIdOrElseThrow(sellerAddNewProductDto.getProductId());
 
         PriceAndStock priceAndStock = priceAndStockService.createAndSavePriceAndStock(

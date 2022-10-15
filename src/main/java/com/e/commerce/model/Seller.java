@@ -38,10 +38,11 @@ public class Seller {
     @OneToOne(cascade = CascadeType.ALL)
     private Address address;
 
-    public Seller(String name, String email, String phoneNumber, Address address) {
+    public Seller(String name, String email, String phoneNumber, Address address, String password) {
         this.name = name;
         this.email = email;
         this.phoneNumber = phoneNumber;
         this.address = address;
+        this.password = password;
     }
 }

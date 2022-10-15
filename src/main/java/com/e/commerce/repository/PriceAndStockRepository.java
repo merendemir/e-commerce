@@ -12,5 +12,7 @@ public interface PriceAndStockRepository extends JpaRepository<PriceAndStock, Lo
 
     Optional<PriceAndStock> findBySellerAndProduct(Seller seller, Product product);
 
-    List<PriceAndStock> findAllByProduct(Product product);
+    List<PriceAndStock> findAllByProduct_Id(Long productId);
+
+    List<PriceAndStock> findAllBySeller_Id(Long productId);
 }
