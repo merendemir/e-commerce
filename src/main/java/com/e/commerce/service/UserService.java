@@ -6,6 +6,7 @@ import com.e.commerce.dto.UserCreateRequestDto;
 import com.e.commerce.dto.UserDto;
 import com.e.commerce.dto.converter.AddressDtoConverter;
 import com.e.commerce.dto.converter.UserDtoConverter;
+import com.e.commerce.enums.Role;
 import com.e.commerce.exceptions.DataNotFoundException;
 import com.e.commerce.exceptions.GenericException;
 import com.e.commerce.model.Address;
@@ -35,9 +36,15 @@ private final UserDtoConverter userDtoConverter;
 
 
     public UserDto createAndSaveUser(UserCreateRequestDto userCreateRequestDto) {
-        return userDtoConverter.convertFromUserToUserDto(
-                this.saveUser(
-                        userDtoConverter.createNewUserFromUserCreateRequestDto(userCreateRequestDto)));
+        User user = new User();
+        user.setName(userCreateRequestDto.getName());
+        user.setLastName(userCreateRequestDto.getLastName());
+        user.setEmail(userCreateRequestDto.getEmail());
+        user.setPhoneNumber(userCreateRequestDto.getPhoneNumber());
+        user.setPassword(PasswordUtil.encodePassword(userCreateRequestDto.getPassword()));
+        user.setRole(Role.USER);
+
+        return userDtoConverter.convertFromUserToUserDto(this.saveUser(user));
     }
 
     public User saveUser(User user) {

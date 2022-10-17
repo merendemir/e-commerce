@@ -1,21 +1,17 @@
 package com.e.commerce.model;
 
-import com.e.commerce.dto.AddressDto;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Date;
+import java.util.Set;
 
 @Entity
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
-public class Address {
+public class Image {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,14 +23,10 @@ public class Address {
     @CreationTimestamp
     private Date createdAt = new Date();
 
-    private String title;
+    @Column(unique = true)
+    private String url;
 
-    private String country;
-
-    private String city;
-
-    private String district;
-
-    private String openAddress;
-
+    public Image(String url) {
+        this.url = url;
+    }
 }

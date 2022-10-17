@@ -1,8 +1,11 @@
 package com.e.commerce.exceptions;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.AccessDeniedException;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -13,6 +16,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RestControllerAdvice
+@Slf4j
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
 	@Override
@@ -24,18 +28,33 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 	}
 
 	@ExceptionHandler(Exception.class)
-	public ResponseEntity<Object> handleException (DataNotFoundException e) {
+	public ResponseEntity<Object> handleException (Exception e) {
+		log.error("Exception :::{}" , e.getMessage());
 		e.printStackTrace();
 		return ResponseEntity.badRequest().body("something went wrong");
 	}
 
-	@ExceptionHandler(DataNotFoundException.class)
-	public ResponseEntity<Object> dataNotFoundException (DataNotFoundException e) {
+	@ExceptionHandler(AccessDeniedException.class)
+	public ResponseEntity<Object> AccessDeniedException(AccessDeniedException e) {
+//		log.error("AccessDeniedException :::{}" , e.getMessage());
 		return ResponseEntity.badRequest().body(e.getMessage());
 	}
 
+	@ExceptionHandler(AuthenticationException.class)
+	public ResponseEntity<Object> AuthenticationException(AuthenticationException e) {
+//		log.error("AuthenticationException :::{}" , e.getMessage());
+		return ResponseEntity.badRequest().body(e.getMessage());
+	}
+
+	@ExceptionHandler(DataNotFoundException.class)
+	public ResponseEntity<Object> dataNotFoundException (DataNotFoundException e) {
+//		log.error("dataNotFoundException :::{}" , e.getMessage());
+		return ResponseEntity.badRequest().body(e.getMessage());
+	}
+
+
 	@ExceptionHandler(GenericException.class)
-	public ResponseEntity<?> handleException(GenericException e) {
+	public ResponseEntity<Object> handleException(GenericException e) {
 		return ResponseEntity
 				.status(e.getHttpStatus() != null ?  e.getHttpStatus() : HttpStatus.BAD_REQUEST)
 				.body(e.getErrorMessage());

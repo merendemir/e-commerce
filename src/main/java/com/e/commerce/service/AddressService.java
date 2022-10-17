@@ -17,7 +17,14 @@ private  final AddressRepository addressRepository;
     }
 
     public Address createAndSaveAddress(AddressDto addressDto) {
-       return this.saveAddress(new Address(addressDto));
+        Address address = new Address();
+        address.setTitle(addressDto.getTitle());
+        address.setCountry(addressDto.getCountry());
+        address.setCity(addressDto.getCity());
+        address.setDistrict(addressDto.getDistrict());
+        address.setOpenAddress(addressDto.getOpenAddress());
+
+       return this.saveAddress(address);
     }
 
     public Address saveAddress(Address address) {

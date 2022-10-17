@@ -1,16 +1,12 @@
 package com.e.commerce.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.validation.constraints.NotBlank;
 
-@Data
+@Getter
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode
 public class UserCreateRequestDto {
 
     @NotBlank

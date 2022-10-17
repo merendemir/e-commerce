@@ -1,16 +1,13 @@
-package com.e.commerce.dto;
+package com.e.commerce.dto.product;
 
 import com.e.commerce.enums.ProductCategory;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.Getter;
 
 import javax.validation.constraints.NotBlank;
+import java.util.Set;
 
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-public class BaseProductDto {
+@Getter
+public class ProductRequestDto {
 
     @NotBlank
     private String name;
@@ -19,5 +16,7 @@ public class BaseProductDto {
     private ProductCategory productCategory;
 
     private String brand;
+
+    private Set<String> images;
 
 }

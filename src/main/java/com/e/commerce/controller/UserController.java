@@ -57,7 +57,8 @@ public class UserController {
 	}
 
 	@GetMapping("/addresses")
-	public ResponseEntity<Object> getUserAddresses(@RequestParam Long userId) {
+	public ResponseEntity<Object> getUserAddresses(HttpServletRequest request) {
+		Long userId = jwtUtil.getUserIdFromToken(request.getHeader(HttpHeaders.AUTHORIZATION));
 		return ResponseEntity.ok(userService.getUserAddress(userId));
 	}
 

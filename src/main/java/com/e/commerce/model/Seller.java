@@ -8,11 +8,7 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
-@ToString
+@Data
 public class Seller {
 
     @Id
@@ -38,11 +34,4 @@ public class Seller {
     @OneToOne(cascade = CascadeType.ALL)
     private Address address;
 
-    public Seller(String name, String email, String phoneNumber, Address address, String password) {
-        this.name = name;
-        this.email = email;
-        this.phoneNumber = phoneNumber;
-        this.address = address;
-        this.password = password;
-    }
 }

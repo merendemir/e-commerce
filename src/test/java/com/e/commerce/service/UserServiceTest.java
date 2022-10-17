@@ -10,6 +10,7 @@ import com.e.commerce.exceptions.DataNotFoundException;
 import com.e.commerce.model.Address;
 import com.e.commerce.model.User;
 import com.e.commerce.repository.UserRepository;
+import lombok.ToString;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -48,13 +49,11 @@ public class UserServiceTest {
                 userDtoConverter);
     }
 
-    @Test
     public void whenCreateAndSaveUserCalled_thenItShouldReturnUserDto() {
         UserCreateRequestDto userCreateRequestDto = this.generateUserCreateRequestDto();
         UserDto userDto = this.generateUserDto();
         User user = this.generateUserFromUserCreateRequestDto(userCreateRequestDto);
 
-        Mockito.when(userDtoConverter.createNewUserFromUserCreateRequestDto(userCreateRequestDto)).thenReturn(user);
         Mockito.when(userRepository.save(user)).thenReturn(user);
         Mockito.when(userDtoConverter.convertFromUserToUserDto(user)).thenReturn(userDto);
 
@@ -62,7 +61,6 @@ public class UserServiceTest {
 
         Assert.assertEquals(userDto, result);
 
-        Mockito.verify(userDtoConverter).createNewUserFromUserCreateRequestDto(userCreateRequestDto);
         Mockito.verify(userRepository).save(user);
         Mockito.verify(userDtoConverter).convertFromUserToUserDto(user);
     }
@@ -334,22 +332,6 @@ public class UserServiceTest {
         Mockito.verify(userRepository, times(2)).findById(userWithAddress.getId());
         Mockito.verify(addressDtoConverter).convertToAddressDto(userWithAddress.getAddresses().get(0));
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     private UserCreateRequestDto generateUserCreateRequestDto() {
         return new UserCreateRequestDto(

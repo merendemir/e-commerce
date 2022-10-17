@@ -19,15 +19,4 @@ public class UserDtoConverter {
                 .build();
     }
 
-    public User createNewUserFromUserCreateRequestDto(UserCreateRequestDto userCreateRequestDto) {
-        return User.builder()
-                .name(userCreateRequestDto.getName())
-                .lastName(userCreateRequestDto.getLastName())
-                .email(userCreateRequestDto.getEmail())
-                .phoneNumber(userCreateRequestDto.getPhoneNumber())
-                .password(PasswordUtil.encodePassword(userCreateRequestDto.getPassword()))
-                .role(Role.USER)
-                .build();
-    }
-
 }

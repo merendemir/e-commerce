@@ -24,5 +24,4 @@ public class AddressDto {
 
     @NotBlank
     private String openAddress;
-
 }
