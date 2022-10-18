@@ -14,6 +14,7 @@ import lombok.ToString;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
 import org.mockito.Mockito;
 
 import java.util.ArrayList;
@@ -21,6 +22,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.times;
 
 public class UserServiceTest {
@@ -49,19 +51,20 @@ public class UserServiceTest {
                 userDtoConverter);
     }
 
+    @Test
     public void whenCreateAndSaveUserCalled_thenItShouldReturnUserDto() {
         UserCreateRequestDto userCreateRequestDto = this.generateUserCreateRequestDto();
         UserDto userDto = this.generateUserDto();
         User user = this.generateUserFromUserCreateRequestDto(userCreateRequestDto);
 
-        Mockito.when(userRepository.save(user)).thenReturn(user);
+        Mockito.when(userRepository.save(any(User.class))).thenReturn(user);
         Mockito.when(userDtoConverter.convertFromUserToUserDto(user)).thenReturn(userDto);
 
         UserDto result = userService.createAndSaveUser(userCreateRequestDto);
 
         Assert.assertEquals(userDto, result);
 
-        Mockito.verify(userRepository).save(user);
+        Mockito.verify(userRepository).save(any(User.class));
         Mockito.verify(userDtoConverter).convertFromUserToUserDto(user);
     }
 
@@ -153,6 +156,29 @@ public class UserServiceTest {
         Assert.assertNull(userService.findUserByIdOrElseThrow(userId));
 
         Mockito.verify(userRepository).findById(userId);
+    }
+
+    @Test
+    public void whenFindUserByEmailOrElseThrowCalledExistUser_thenItShouldReturnUser() {
+        User user = this.generateUserFromUserDto(this.generateUserDto());
+
+        Mockito.when(userRepository.findByEmail(user.getEmail())).thenReturn(Optional.of(user));
+
+        User result = userService.findUserByEmailOrElseThrow(user.getEmail());
+
+        Assert.assertEquals(result, user);
+
+        Mockito.verify(userRepository).findByEmail(user.getEmail());
+    }
+
+    @Test(expected = DataNotFoundException.class)
+    public void whenFindUserByEmailOrElseThrowCalledNotExistUser_thenItShouldThrowDataNotFoundException() {
+        String email = "";
+
+        Mockito.when(userRepository.findByEmail(email)).thenThrow(new DataNotFoundException("User not found by email :" + email));
+        Assert.assertNull(userService.findUserByEmailOrElseThrow(email));
+
+        Mockito.verify(userRepository).findByEmail(email);
     }
 
     @Test

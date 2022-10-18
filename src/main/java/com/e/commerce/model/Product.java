@@ -8,8 +8,11 @@ import java.util.Set;
 
 @Entity
 @Getter
+@Builder
 @Setter
 @ToString
+@NoArgsConstructor
+@AllArgsConstructor
 public class Product {
 
     @Id

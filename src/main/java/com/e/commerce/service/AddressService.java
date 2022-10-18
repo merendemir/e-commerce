@@ -39,7 +39,6 @@ private  final AddressRepository addressRepository;
 
     public Address updateAddress(Long addressId, AddressDto addressDto) {
         Address address = this.findAddressByIdOrElseThrow(addressId);
-
         address.setTitle(addressDto.getTitle());
         address.setCountry(addressDto.getCountry());
         address.setCity(addressDto.getCity());
@@ -48,7 +47,6 @@ private  final AddressRepository addressRepository;
 
         return this.saveAddress(address);
     }
-
     public void deleteAddress(Long addressId) {
         Address address = this.findAddressByIdOrElseThrow(addressId);
         addressRepository.delete(address);
