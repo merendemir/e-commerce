@@ -4,19 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4c2eb0d3-07a4-4c5b-83b9-d24f2a0e43ea" name="Changes" comment="refactor project">
-      <change afterPath="$PROJECT_DIR$/src/test/java/com/e/commerce/service/AddressServiceTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/com/e/commerce/service/AdminServiceTest.java" afterDir="false" />
+    <list default="true" id="4c2eb0d3-07a4-4c5b-83b9-d24f2a0e43ea" name="Changes" comment="AddressServiceTest and AdminServiceTest impl">
+      <change afterPath="$PROJECT_DIR$/src/test/java/com/e/commerce/service/AuthServiceTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/com/e/commerce/service/ImagesServiceTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/e/commerce/controller/ProductController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/e/commerce/controller/ProductController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/e/commerce/dto/AddressDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/e/commerce/dto/AddressDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/e/commerce/dto/UserCreateRequestDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/e/commerce/dto/UserCreateRequestDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/e/commerce/model/Address.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/e/commerce/model/Address.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/e/commerce/model/Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/e/commerce/model/Product.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/e/commerce/model/ProductCustomization.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/e/commerce/model/ProductCustomization.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/e/commerce/model/Seller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/e/commerce/model/Seller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/e/commerce/service/AddressService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/e/commerce/service/AddressService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/e/commerce/service/UserServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/e/commerce/service/UserServiceTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/e/commerce/model/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/e/commerce/model/User.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -77,7 +70,7 @@
     &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.general&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.idesettings.debugger.capture&quot;,
     &quot;spring.configuration.checksum&quot;: &quot;dc907640c4fad1f3b530906e04d4f81e&quot;
   }
 }</component>
@@ -95,15 +88,15 @@
       <recent name="com.e.commerce.service" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.e.commerce.security" />
+      <recent name="com.e.commerce.configuration" />
       <recent name="com.e.commerce.service" />
       <recent name="com.e.commerce.dto.ProductCustomization" />
       <recent name="com.e.commerce.dto.converter" />
-      <recent name="com.e.commerce.dto.product" />
-      <recent name="com.e.commerce.dto.seller" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.AdminServiceTest.whenGetAllProductWithSellerForAdminCalled_itShouldReturnGetAllProductWithSellerDtoList">
-    <configuration name="AddressServiceTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="Spring Boot.CommerceApplication">
+    <configuration name="AuthServiceTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="commerce" />
       <extension name="coverage">
         <pattern>
@@ -112,13 +105,13 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="com.e.commerce.service" />
-      <option name="MAIN_CLASS_NAME" value="com.e.commerce.service.AddressServiceTest" />
+      <option name="MAIN_CLASS_NAME" value="com.e.commerce.service.AuthServiceTest" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="AddressServiceTest.updateAddress_whenUpdateAddressCalled_thenItShouldReturnUpdatedAddress" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="AuthServiceTest.whenLoginCalledWithWrongPassword_thenItShouldReturnAuthToken" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="commerce" />
       <extension name="coverage">
         <pattern>
@@ -127,14 +120,14 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="com.e.commerce.service" />
-      <option name="MAIN_CLASS_NAME" value="com.e.commerce.service.AddressServiceTest" />
-      <option name="METHOD_NAME" value="updateAddress_whenUpdateAddressCalled_thenItShouldReturnUpdatedAddress" />
+      <option name="MAIN_CLASS_NAME" value="com.e.commerce.service.AuthServiceTest" />
+      <option name="METHOD_NAME" value="whenLoginCalledWithWrongPassword_thenItShouldReturnAuthToken" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="AddressServiceTest.whenCreateAndSaveAddressCalled_itShouldReturnAddress" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="AuthServiceTest.whenLoginForSellerCalledWithTruePassword_thenItShouldReturnAuthToken" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="commerce" />
       <extension name="coverage">
         <pattern>
@@ -143,14 +136,14 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="com.e.commerce.service" />
-      <option name="MAIN_CLASS_NAME" value="com.e.commerce.service.AddressServiceTest" />
-      <option name="METHOD_NAME" value="whenCreateAndSaveAddressCalled_itShouldReturnAddress" />
+      <option name="MAIN_CLASS_NAME" value="com.e.commerce.service.AuthServiceTest" />
+      <option name="METHOD_NAME" value="whenLoginForSellerCalledWithTruePassword_thenItShouldReturnAuthToken" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="AdminServiceTest.whenGetAllProductWithSellerForAdminCalled_itShouldReturnGetAllProductWithSellerDtoList" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="AuthServiceTest.whenLoginForSellerCalledWithWrongPassword_thenItShouldReturnAuthToken" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="commerce" />
       <extension name="coverage">
         <pattern>
@@ -159,14 +152,14 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="com.e.commerce.service" />
-      <option name="MAIN_CLASS_NAME" value="com.e.commerce.service.AdminServiceTest" />
-      <option name="METHOD_NAME" value="whenGetAllProductWithSellerForAdminCalled_itShouldReturnGetAllProductWithSellerDtoList" />
+      <option name="MAIN_CLASS_NAME" value="com.e.commerce.service.AuthServiceTest" />
+      <option name="METHOD_NAME" value="whenLoginForSellerCalledWithWrongPassword_thenItShouldReturnAuthToken" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="UserServiceTest.whenCreateAndSaveUserCalled_thenItShouldReturnUserDto" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="com.e.commerce.service in commerce" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="commerce" />
       <extension name="coverage">
         <pattern>
@@ -175,20 +168,25 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="com.e.commerce.service" />
-      <option name="MAIN_CLASS_NAME" value="com.e.commerce.service.UserServiceTest" />
-      <option name="METHOD_NAME" value="whenCreateAndSaveUserCalled_thenItShouldReturnUserDto" />
-      <option name="TEST_OBJECT" value="method" />
+      <option name="TEST_OBJECT" value="package" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="CommerceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="commerce" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.e.commerce.CommerceApplication" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.AdminServiceTest.whenGetAllProductWithSellerForAdminCalled_itShouldReturnGetAllProductWithSellerDtoList" />
-        <item itemvalue="JUnit.AddressServiceTest.updateAddress_whenUpdateAddressCalled_thenItShouldReturnUpdatedAddress" />
-        <item itemvalue="JUnit.AddressServiceTest" />
-        <item itemvalue="JUnit.UserServiceTest.whenCreateAndSaveUserCalled_thenItShouldReturnUserDto" />
-        <item itemvalue="JUnit.AddressServiceTest.whenCreateAndSaveAddressCalled_itShouldReturnAddress" />
+        <item itemvalue="JUnit.com.e.commerce.service in commerce" />
+        <item itemvalue="JUnit.AuthServiceTest" />
+        <item itemvalue="JUnit.AuthServiceTest.whenLoginForSellerCalledWithWrongPassword_thenItShouldReturnAuthToken" />
+        <item itemvalue="JUnit.AuthServiceTest.whenLoginForSellerCalledWithTruePassword_thenItShouldReturnAuthToken" />
+        <item itemvalue="JUnit.AuthServiceTest.whenLoginCalledWithWrongPassword_thenItShouldReturnAuthToken" />
       </list>
     </recent_temporary>
   </component>
@@ -224,7 +222,15 @@
       <workItem from="1666033429170" duration="130000" />
       <workItem from="1666079067565" duration="599000" />
       <workItem from="1666118135685" duration="3619000" />
-      <workItem from="1666123720810" duration="5666000" />
+      <workItem from="1666123720810" duration="6541000" />
+      <workItem from="1666167376839" duration="3261000" />
+      <workItem from="1666246156310" duration="1735000" />
+      <workItem from="1666333985719" duration="599000" />
+      <workItem from="1666356265037" duration="2937000" />
+      <workItem from="1666379747291" duration="598000" />
+      <workItem from="1666692606887" duration="1947000" />
+      <workItem from="1667047364623" duration="711000" />
+      <workItem from="1667674887044" duration="5347000" />
     </task>
     <task id="LOCAL-00001" summary="initial commit">
       <created>1663590473448</created>
@@ -289,7 +295,14 @@
       <option name="project" value="LOCAL" />
       <updated>1666011426403</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="AddressServiceTest and AdminServiceTest impl">
+      <created>1666131492706</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1666131492706</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -327,7 +340,12 @@
     <MESSAGE value="webSecurityCustomizer to AUTH_WHITELIST" />
     <MESSAGE value="jwtUtil claims" />
     <MESSAGE value="refactor project" />
-    <option name="LAST_COMMIT_MESSAGE" value="refactor project" />
+    <MESSAGE value="AddressServiceTest and AdminServiceTest impl" />
+    <option name="LAST_COMMIT_MESSAGE" value="AddressServiceTest and AdminServiceTest impl" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/commerce$UserServiceTest_whenDeleteUserCalledExistUser_thenItShouldReturnUser.ic" NAME="UserServiceTest.whenDeleteUserCalledExistUser_thenItShouldReturnUser Coverage Results" MODIFIED="1666123834868" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
@@ -343,6 +361,9 @@
       <FILTER>com.e.commerce.service.*</FILTER>
     </SUITE>
     <SUITE FILE_PATH="coverage/commerce$AddressServiceTest_whenUpdateAddressCalled_thenItShouldReturnUpdatedAddress.ic" NAME="AddressServiceTest.whenUpdateAddressCalled_thenItShouldReturnUpdatedAddress Coverage Results" MODIFIED="1666127996449" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>com.e.commerce.service.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/commerce$AuthServiceTest.ic" NAME="AuthServiceTest Coverage Results" MODIFIED="1666207153819" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>com.e.commerce.service.*</FILTER>
     </SUITE>
     <SUITE FILE_PATH="coverage/commerce$UserServiceTest.ic" NAME="UserServiceTest Coverage Results" MODIFIED="1666123857145" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
@@ -378,10 +399,16 @@
     <SUITE FILE_PATH="coverage/commerce$UserServiceTest_whenGetUserAsDtoCalledWithNonExistUser_thenItShouldThrowDataNotFoundException.ic" NAME="UserServiceTest.whenGetUserAsDtoCalledWithNonExistUser_thenItShouldThrowDataNotFoundException Coverage Results" MODIFIED="1666123759041" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>com.e.commerce.service.*</FILTER>
     </SUITE>
+    <SUITE FILE_PATH="coverage/commerce$com_e_commerce_service_in_commerce.ic" NAME="com.e.commerce.service in commerce Coverage Results" MODIFIED="1666356360493" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>com.e.commerce.service.*</FILTER>
+    </SUITE>
     <SUITE FILE_PATH="coverage/commerce$AddressServiceTest_whenFindAddressByIdOrElseThrowCalledNotExistAddress_thenItShouldThrowDataNotFoundException.ic" NAME="AddressServiceTest.whenFindAddressByIdOrElseThrowCalledNotExistAddress_thenItShouldThrowDataNotFoundException Coverage Results" MODIFIED="1666125128435" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>com.e.commerce.service.*</FILTER>
     </SUITE>
     <SUITE FILE_PATH="coverage/commerce$UserServiceTest_whenGetUserAsDtoCalledWithExistUser_thenItShouldReturnUserDto.ic" NAME="UserServiceTest.whenGetUserAsDtoCalledWithExistUser_thenItShouldReturnUserDto Coverage Results" MODIFIED="1666123752362" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>com.e.commerce.service.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/commerce$AdminServiceTest_whenGetAllProductWithSellerForAdminCalled_itShouldReturnGetAllProductWithSellerDtoList.ic" NAME="AdminServiceTest.whenGetAllProductWithSellerForAdminCalled_itShouldReturnGetAllProductWithSellerDtoList Coverage Results" MODIFIED="1666131331372" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>com.e.commerce.service.*</FILTER>
     </SUITE>
   </component>
