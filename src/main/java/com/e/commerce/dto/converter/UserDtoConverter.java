@@ -1,10 +1,7 @@
 package com.e.commerce.dto.converter;
 
-import com.e.commerce.dto.UserCreateRequestDto;
 import com.e.commerce.dto.UserDto;
-import com.e.commerce.enums.Role;
 import com.e.commerce.model.User;
-import com.e.commerce.util.PasswordUtil;
 import org.springframework.stereotype.Component;
 
 @Component

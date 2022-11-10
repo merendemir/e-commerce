@@ -4,12 +4,26 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4c2eb0d3-07a4-4c5b-83b9-d24f2a0e43ea" name="Changes" comment="AddressServiceTest and AdminServiceTest impl">
-      <change afterPath="$PROJECT_DIR$/src/test/java/com/e/commerce/service/AuthServiceTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/com/e/commerce/service/ImagesServiceTest.java" afterDir="false" />
+    <list default="true" id="4c2eb0d3-07a4-4c5b-83b9-d24f2a0e43ea" name="Changes" comment="auth and images services test">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/e/commerce/model/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/e/commerce/model/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/e/commerce/dto/SellerProductCustomizationDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/e/commerce/dto/SellerProductCustomizationDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/e/commerce/dto/UserCreateRequestDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/e/commerce/dto/UserCreateRequestDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/e/commerce/dto/converter/ProductDtoConverter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/e/commerce/dto/converter/ProductDtoConverter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/e/commerce/dto/converter/UserDtoConverter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/e/commerce/dto/converter/UserDtoConverter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/e/commerce/dto/product/ProductUpdateRequestDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/e/commerce/dto/product/ProductUpdateRequestDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/e/commerce/dto/product/ProductWithSellerDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/e/commerce/dto/product/ProductWithSellerDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/e/commerce/dto/product/ProductWithoutSellersDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/e/commerce/dto/product/ProductWithoutSellersDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/e/commerce/dto/seller/SellerAndProductCustomizationDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/e/commerce/dto/seller/SellerAndProductCustomizationDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/e/commerce/model/Address.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/e/commerce/model/Address.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/e/commerce/model/Image.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/e/commerce/model/Image.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/e/commerce/model/ProductCustomization.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/e/commerce/model/ProductCustomization.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/e/commerce/model/Seller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/e/commerce/model/Seller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/e/commerce/repository/ProductRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/e/commerce/repository/ProductRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/e/commerce/security/JwtFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/e/commerce/security/JwtFilter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/e/commerce/security/UserDetailsServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/e/commerce/security/UserDetailsServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/e/commerce/service/ImagesService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/e/commerce/service/ImagesService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/e/commerce/service/ProductService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/e/commerce/service/ProductService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/e/commerce/service/ImagesServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/e/commerce/service/ImagesServiceTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -95,8 +109,8 @@
       <recent name="com.e.commerce.dto.converter" />
     </key>
   </component>
-  <component name="RunManager" selected="Spring Boot.CommerceApplication">
-    <configuration name="AuthServiceTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="JUnit.ImagesServiceTest">
+    <configuration name="ImagesServiceTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="commerce" />
       <extension name="coverage">
         <pattern>
@@ -105,13 +119,13 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="com.e.commerce.service" />
-      <option name="MAIN_CLASS_NAME" value="com.e.commerce.service.AuthServiceTest" />
+      <option name="MAIN_CLASS_NAME" value="com.e.commerce.service.ImagesServiceTest" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="AuthServiceTest.whenLoginCalledWithWrongPassword_thenItShouldReturnAuthToken" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="ImagesServiceTest.whenFindImageByIdOrElseThrowCalledExistImage_thenItShouldReturnImage" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="commerce" />
       <extension name="coverage">
         <pattern>
@@ -120,14 +134,14 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="com.e.commerce.service" />
-      <option name="MAIN_CLASS_NAME" value="com.e.commerce.service.AuthServiceTest" />
-      <option name="METHOD_NAME" value="whenLoginCalledWithWrongPassword_thenItShouldReturnAuthToken" />
+      <option name="MAIN_CLASS_NAME" value="com.e.commerce.service.ImagesServiceTest" />
+      <option name="METHOD_NAME" value="whenFindImageByIdOrElseThrowCalledExistImage_thenItShouldReturnImage" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="AuthServiceTest.whenLoginForSellerCalledWithTruePassword_thenItShouldReturnAuthToken" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="ImagesServiceTest.whenIsUrlExistsCalledWithExistsUrl_itShouldReturnTrue" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="commerce" />
       <extension name="coverage">
         <pattern>
@@ -136,14 +150,14 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="com.e.commerce.service" />
-      <option name="MAIN_CLASS_NAME" value="com.e.commerce.service.AuthServiceTest" />
-      <option name="METHOD_NAME" value="whenLoginForSellerCalledWithTruePassword_thenItShouldReturnAuthToken" />
+      <option name="MAIN_CLASS_NAME" value="com.e.commerce.service.ImagesServiceTest" />
+      <option name="METHOD_NAME" value="whenIsUrlExistsCalledWithExistsUrl_itShouldReturnTrue" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="AuthServiceTest.whenLoginForSellerCalledWithWrongPassword_thenItShouldReturnAuthToken" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="ImagesServiceTest.whenIsUrlExistsCalledWithNonExistsUrl_itShouldReturnFalse" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="commerce" />
       <extension name="coverage">
         <pattern>
@@ -152,14 +166,14 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="com.e.commerce.service" />
-      <option name="MAIN_CLASS_NAME" value="com.e.commerce.service.AuthServiceTest" />
-      <option name="METHOD_NAME" value="whenLoginForSellerCalledWithWrongPassword_thenItShouldReturnAuthToken" />
+      <option name="MAIN_CLASS_NAME" value="com.e.commerce.service.ImagesServiceTest" />
+      <option name="METHOD_NAME" value="whenIsUrlExistsCalledWithNonExistsUrl_itShouldReturnFalse" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="com.e.commerce.service in commerce" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="ImagesServiceTest.whenUpdateImageCalled_thenItShouldReturnUpdatedImage" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="commerce" />
       <extension name="coverage">
         <pattern>
@@ -168,7 +182,9 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="com.e.commerce.service" />
-      <option name="TEST_OBJECT" value="package" />
+      <option name="MAIN_CLASS_NAME" value="com.e.commerce.service.ImagesServiceTest" />
+      <option name="METHOD_NAME" value="whenUpdateImageCalled_thenItShouldReturnUpdatedImage" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -182,11 +198,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.com.e.commerce.service in commerce" />
-        <item itemvalue="JUnit.AuthServiceTest" />
-        <item itemvalue="JUnit.AuthServiceTest.whenLoginForSellerCalledWithWrongPassword_thenItShouldReturnAuthToken" />
-        <item itemvalue="JUnit.AuthServiceTest.whenLoginForSellerCalledWithTruePassword_thenItShouldReturnAuthToken" />
-        <item itemvalue="JUnit.AuthServiceTest.whenLoginCalledWithWrongPassword_thenItShouldReturnAuthToken" />
+        <item itemvalue="JUnit.ImagesServiceTest" />
+        <item itemvalue="JUnit.ImagesServiceTest.whenUpdateImageCalled_thenItShouldReturnUpdatedImage" />
+        <item itemvalue="JUnit.ImagesServiceTest.whenFindImageByIdOrElseThrowCalledExistImage_thenItShouldReturnImage" />
+        <item itemvalue="JUnit.ImagesServiceTest.whenIsUrlExistsCalledWithNonExistsUrl_itShouldReturnFalse" />
+        <item itemvalue="JUnit.ImagesServiceTest.whenIsUrlExistsCalledWithExistsUrl_itShouldReturnTrue" />
       </list>
     </recent_temporary>
   </component>
@@ -231,6 +247,8 @@
       <workItem from="1666692606887" duration="1947000" />
       <workItem from="1667047364623" duration="711000" />
       <workItem from="1667674887044" duration="5347000" />
+      <workItem from="1667805945518" duration="5000" />
+      <workItem from="1668076371704" duration="2073000" />
     </task>
     <task id="LOCAL-00001" summary="initial commit">
       <created>1663590473448</created>
@@ -387,6 +405,9 @@
     <SUITE FILE_PATH="coverage/commerce$AddressServiceTest_whenFindAddressByIdOrElseThrowCalledExistAddress_thenItShouldReturnAddress.ic" NAME="AddressServiceTest.whenFindAddressByIdOrElseThrowCalledExistAddress_thenItShouldReturnAddress Coverage Results" MODIFIED="1666124890457" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>com.e.commerce.service.*</FILTER>
     </SUITE>
+    <SUITE FILE_PATH="coverage/commerce$ImagesServiceTest.ic" NAME="ImagesServiceTest Coverage Results" MODIFIED="1668078278207" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>com.e.commerce.service.*</FILTER>
+    </SUITE>
     <SUITE FILE_PATH="coverage/commerce$AddressServiceTest.ic" NAME="AddressServiceTest Coverage Results" MODIFIED="1666128825705" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>com.e.commerce.service.*</FILTER>
     </SUITE>
@@ -399,7 +420,7 @@
     <SUITE FILE_PATH="coverage/commerce$UserServiceTest_whenGetUserAsDtoCalledWithNonExistUser_thenItShouldThrowDataNotFoundException.ic" NAME="UserServiceTest.whenGetUserAsDtoCalledWithNonExistUser_thenItShouldThrowDataNotFoundException Coverage Results" MODIFIED="1666123759041" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>com.e.commerce.service.*</FILTER>
     </SUITE>
-    <SUITE FILE_PATH="coverage/commerce$com_e_commerce_service_in_commerce.ic" NAME="com.e.commerce.service in commerce Coverage Results" MODIFIED="1666356360493" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+    <SUITE FILE_PATH="coverage/commerce$com_e_commerce_service_in_commerce.ic" NAME="com.e.commerce.service in commerce Coverage Results" MODIFIED="1668076396759" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>com.e.commerce.service.*</FILTER>
     </SUITE>
     <SUITE FILE_PATH="coverage/commerce$AddressServiceTest_whenFindAddressByIdOrElseThrowCalledNotExistAddress_thenItShouldThrowDataNotFoundException.ic" NAME="AddressServiceTest.whenFindAddressByIdOrElseThrowCalledNotExistAddress_thenItShouldThrowDataNotFoundException Coverage Results" MODIFIED="1666125128435" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">

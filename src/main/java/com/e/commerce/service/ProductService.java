@@ -3,19 +3,20 @@ package com.e.commerce.service;
 
 import com.e.commerce.dto.converter.ProductCustomizationConverter;
 import com.e.commerce.dto.converter.ProductDtoConverter;
-import com.e.commerce.dto.converter.SellerDtoConverter;
-import com.e.commerce.dto.product.*;
-import com.e.commerce.dto.seller.SellerAndProductCustomizationDto;
+import com.e.commerce.dto.product.ProductRequestDto;
+import com.e.commerce.dto.product.ProductUpdateRequestDto;
+import com.e.commerce.dto.product.ProductWithSellerDto;
+import com.e.commerce.dto.product.ProductWithoutSellersDto;
 import com.e.commerce.enums.ProductCategory;
 import com.e.commerce.exceptions.DataNotFoundException;
 import com.e.commerce.model.Image;
 import com.e.commerce.model.Product;
-import com.e.commerce.model.Seller;
 import com.e.commerce.repository.ProductRepository;
-import com.e.commerce.repository.SellerRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
+import java.util.List;
+import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service

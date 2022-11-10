@@ -7,8 +7,6 @@ import com.e.commerce.repository.ImageRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
-
 @Service
 public class ImagesService {
 
@@ -40,10 +38,6 @@ private  final ImageRepository imageRepository;
                         () ->  new DataNotFoundException("Image not found by id :" + imageId));
     }
 
-    public Optional<Image> findOptionalImageByUrl(String url) {
-        return imageRepository.findByUrl(url);
-    }
-
     public Image updateImage(Long imageId, String url) {
         Image image = this.findImageByIdOrElseThrow(imageId);
         image.setUrl(url);
@@ -52,7 +46,6 @@ private  final ImageRepository imageRepository;
     }
 
     public void deleteImage(Long imageId) {
-        Image image = this.findImageByIdOrElseThrow(imageId);
-        imageRepository.delete(image);
+        imageRepository.deleteById(imageId);
     }
 }

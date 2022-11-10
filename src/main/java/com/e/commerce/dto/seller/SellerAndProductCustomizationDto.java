@@ -1,7 +1,9 @@
 package com.e.commerce.dto.seller;
 
 import com.e.commerce.model.Address;
-import lombok.*;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.ToString;
 
 import java.math.BigDecimal;
 import java.util.Date;

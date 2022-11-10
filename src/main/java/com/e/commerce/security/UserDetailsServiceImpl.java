@@ -1,8 +1,6 @@
 package com.e.commerce.security;
 
 import com.auth0.jwt.interfaces.DecodedJWT;
-import com.e.commerce.model.Seller;
-import com.e.commerce.model.User;
 import com.e.commerce.service.SellerService;
 import com.e.commerce.service.UserService;
 import com.e.commerce.util.JWTUtil;

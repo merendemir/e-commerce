@@ -1,11 +1,8 @@
 package com.e.commerce.dto;
 
 import com.e.commerce.model.ProductCustomization;
-import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.springdoc.core.customizers.ParameterCustomizer;
 
 import java.math.BigDecimal;
 

@@ -1,7 +1,9 @@
 package com.e.commerce.dto.product;
 
 import com.e.commerce.enums.ProductCategory;
-import lombok.*;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.ToString;
 
 import java.util.List;
 
