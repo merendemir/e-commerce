@@ -4,11 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4c2eb0d3-07a4-4c5b-83b9-d24f2a0e43ea" name="Changes" comment="ImagesServiceTest impl">
+    <list default="true" id="4c2eb0d3-07a4-4c5b-83b9-d24f2a0e43ea" name="Changes" comment="UserServiceTest refactor">
+      <change afterPath="$PROJECT_DIR$/src/test/java/com/e/commerce/service/ProductCustomizationServiceTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/e/commerce/dto/UserCreateRequestDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/e/commerce/dto/UserCreateRequestDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/e/commerce/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/e/commerce/service/UserService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/e/commerce/service/UserServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/e/commerce/service/UserServiceTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/e/commerce/dto/SellerProductCustomizationDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/e/commerce/dto/SellerProductCustomizationDto.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -87,15 +86,15 @@
       <recent name="com.e.commerce.service" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.e.commerce.service" />
       <recent name="com.e.commerce.security" />
       <recent name="com.e.commerce.configuration" />
-      <recent name="com.e.commerce.service" />
       <recent name="com.e.commerce.dto.ProductCustomization" />
       <recent name="com.e.commerce.dto.converter" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.com.e.commerce.service in commerce">
-    <configuration name="UserServiceTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="JUnit.ProductCustomizationServiceTest">
+    <configuration name="ProductCustomizationServiceTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="commerce" />
       <extension name="coverage">
         <pattern>
@@ -104,13 +103,13 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="com.e.commerce.service" />
-      <option name="MAIN_CLASS_NAME" value="com.e.commerce.service.UserServiceTest" />
+      <option name="MAIN_CLASS_NAME" value="com.e.commerce.service.ProductCustomizationServiceTest" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="UserServiceTest.whenDeleteUserAddressCalled_thenItShouldReturnAddressDtoList" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="ProductCustomizationServiceTest.whenCreateAndSaveCalled_itShouldReturnProductCustomization" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="commerce" />
       <extension name="coverage">
         <pattern>
@@ -119,14 +118,14 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="com.e.commerce.service" />
-      <option name="MAIN_CLASS_NAME" value="com.e.commerce.service.UserServiceTest" />
-      <option name="METHOD_NAME" value="whenDeleteUserAddressCalled_thenItShouldReturnAddressDtoList" />
+      <option name="MAIN_CLASS_NAME" value="com.e.commerce.service.ProductCustomizationServiceTest" />
+      <option name="METHOD_NAME" value="whenCreateAndSaveCalled_itShouldReturnProductCustomization" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="UserServiceTest.whenGetUserAddressCalledAndUserAddressNonExists_thenItShouldReturnEmptyList" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="ProductCustomizationServiceTest.whenFindAllByProductIdCalled_itShouldReturnProductCustomizationList" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="commerce" />
       <extension name="coverage">
         <pattern>
@@ -135,14 +134,14 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="com.e.commerce.service" />
-      <option name="MAIN_CLASS_NAME" value="com.e.commerce.service.UserServiceTest" />
-      <option name="METHOD_NAME" value="whenGetUserAddressCalledAndUserAddressNonExists_thenItShouldReturnEmptyList" />
+      <option name="MAIN_CLASS_NAME" value="com.e.commerce.service.ProductCustomizationServiceTest" />
+      <option name="METHOD_NAME" value="whenFindAllByProductIdCalled_itShouldReturnProductCustomizationList" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="UserServiceTest.whenUpdateUserAddressCalledAndUserAddressNonExists_thenItShouldThrowDataNotFoundException" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="ProductCustomizationServiceTest.whenFindAllBySellerNameCalled_itShouldReturnProductCustomizationList" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="commerce" />
       <extension name="coverage">
         <pattern>
@@ -151,14 +150,14 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="com.e.commerce.service" />
-      <option name="MAIN_CLASS_NAME" value="com.e.commerce.service.UserServiceTest" />
-      <option name="METHOD_NAME" value="whenUpdateUserAddressCalledAndUserAddressNonExists_thenItShouldThrowDataNotFoundException" />
+      <option name="MAIN_CLASS_NAME" value="com.e.commerce.service.ProductCustomizationServiceTest" />
+      <option name="METHOD_NAME" value="whenFindAllBySellerNameCalled_itShouldReturnProductCustomizationList" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="com.e.commerce.service in commerce" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="ProductCustomizationServiceTest.whenFindOptionalBySellerIdAndProductIdCalled_itShouldReturnOptionalProductCustomization" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="commerce" />
       <extension name="coverage">
         <pattern>
@@ -167,7 +166,9 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="com.e.commerce.service" />
-      <option name="TEST_OBJECT" value="package" />
+      <option name="MAIN_CLASS_NAME" value="com.e.commerce.service.ProductCustomizationServiceTest" />
+      <option name="METHOD_NAME" value="whenFindOptionalBySellerIdAndProductIdCalled_itShouldReturnOptionalProductCustomization" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -181,11 +182,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.com.e.commerce.service in commerce" />
-        <item itemvalue="JUnit.UserServiceTest" />
-        <item itemvalue="JUnit.UserServiceTest.whenDeleteUserAddressCalled_thenItShouldReturnAddressDtoList" />
-        <item itemvalue="JUnit.UserServiceTest.whenGetUserAddressCalledAndUserAddressNonExists_thenItShouldReturnEmptyList" />
-        <item itemvalue="JUnit.UserServiceTest.whenUpdateUserAddressCalledAndUserAddressNonExists_thenItShouldThrowDataNotFoundException" />
+        <item itemvalue="JUnit.ProductCustomizationServiceTest" />
+        <item itemvalue="JUnit.ProductCustomizationServiceTest.whenFindAllBySellerNameCalled_itShouldReturnProductCustomizationList" />
+        <item itemvalue="JUnit.ProductCustomizationServiceTest.whenFindAllByProductIdCalled_itShouldReturnProductCustomizationList" />
+        <item itemvalue="JUnit.ProductCustomizationServiceTest.whenFindOptionalBySellerIdAndProductIdCalled_itShouldReturnOptionalProductCustomization" />
+        <item itemvalue="JUnit.ProductCustomizationServiceTest.whenCreateAndSaveCalled_itShouldReturnProductCustomization" />
       </list>
     </recent_temporary>
   </component>
@@ -232,7 +233,7 @@
       <workItem from="1667674887044" duration="5347000" />
       <workItem from="1667805945518" duration="5000" />
       <workItem from="1668076371704" duration="6862000" />
-      <workItem from="1668104867769" duration="1855000" />
+      <workItem from="1668104867769" duration="4928000" />
     </task>
     <task id="LOCAL-00001" summary="initial commit">
       <created>1663590473448</created>
@@ -311,7 +312,14 @@
       <option name="project" value="LOCAL" />
       <updated>1668078463231</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="UserServiceTest refactor">
+      <created>1668106880687</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1668106880687</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -351,7 +359,8 @@
     <MESSAGE value="refactor project" />
     <MESSAGE value="AddressServiceTest and AdminServiceTest impl" />
     <MESSAGE value="ImagesServiceTest impl" />
-    <option name="LAST_COMMIT_MESSAGE" value="ImagesServiceTest impl" />
+    <MESSAGE value="UserServiceTest refactor" />
+    <option name="LAST_COMMIT_MESSAGE" value="UserServiceTest refactor" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -375,16 +384,10 @@
     <SUITE FILE_PATH="coverage/commerce$UserServiceTest_whenDeleteUserCalledExistUser_thenItShouldReturnUser.ic" NAME="UserServiceTest.whenDeleteUserCalledExistUser_thenItShouldReturnUser Coverage Results" MODIFIED="1666123834868" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>com.e.commerce.service.*</FILTER>
     </SUITE>
-    <SUITE FILE_PATH="coverage/commerce$UserServiceTest_whenFindUserByIdOrElseThrowCalledExistUser_thenItShouldReturnUser.ic" NAME="UserServiceTest.whenFindUserByIdOrElseThrowCalledExistUser_thenItShouldReturnUser Coverage Results" MODIFIED="1666123815634" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>com.e.commerce.service.*</FILTER>
-    </SUITE>
     <SUITE FILE_PATH="coverage/commerce$UserServiceTest_whenFindUserByEmailOrElseThrowCalledNotExistUser_thenItShouldThrowDataNotFoundException.ic" NAME="UserServiceTest.whenFindUserByEmailOrElseThrowCalledNotExistUser_thenItShouldThrowDataNotFoundException Coverage Results" MODIFIED="1666124027406" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>com.e.commerce.service.*</FILTER>
     </SUITE>
     <SUITE FILE_PATH="coverage/commerce$UserServiceTest_whenGetAllUserForAdminAndRepositoryDoesNotHaveUser_thenItShouldReturnEmptyList.ic" NAME="UserServiceTest.whenGetAllUserForAdminAndRepositoryDoesNotHaveUser_thenItShouldReturnEmptyList Coverage Results" MODIFIED="1666123789729" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>com.e.commerce.service.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/commerce$AddressServiceTest_whenUpdateAddressCalled_thenItShouldReturnUpdatedAddress.ic" NAME="AddressServiceTest.whenUpdateAddressCalled_thenItShouldReturnUpdatedAddress Coverage Results" MODIFIED="1666127996449" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>com.e.commerce.service.*</FILTER>
     </SUITE>
     <SUITE FILE_PATH="coverage/commerce$AuthServiceTest.ic" NAME="AuthServiceTest Coverage Results" MODIFIED="1666207153819" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
@@ -402,13 +405,7 @@
     <SUITE FILE_PATH="coverage/commerce$AddressServiceTest_whenSaveAddressCalled_itShouldReturnAddress.ic" NAME="AddressServiceTest.whenSaveAddressCalled_itShouldReturnAddress Coverage Results" MODIFIED="1666124702789" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>com.e.commerce.service.*</FILTER>
     </SUITE>
-    <SUITE FILE_PATH="coverage/commerce$UserServiceTest_whenUpdateUserCalledExistUser_thenItShouldReturnUserDto.ic" NAME="UserServiceTest.whenUpdateUserCalledExistUser_thenItShouldReturnUserDto Coverage Results" MODIFIED="1666123830269" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>com.e.commerce.service.*</FILTER>
-    </SUITE>
     <SUITE FILE_PATH="coverage/commerce$UserServiceTest_whenCreateAndSaveUserCalled_thenItShouldReturnUserDto.ic" NAME="UserServiceTest.whenCreateAndSaveUserCalled_thenItShouldReturnUserDto Coverage Results" MODIFIED="1666128804410" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>com.e.commerce.service.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/commerce$AddressServiceTest_whenFindAddressByIdOrElseThrowCalledExistAddress_thenItShouldReturnAddress.ic" NAME="AddressServiceTest.whenFindAddressByIdOrElseThrowCalledExistAddress_thenItShouldReturnAddress Coverage Results" MODIFIED="1666124890457" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>com.e.commerce.service.*</FILTER>
     </SUITE>
     <SUITE FILE_PATH="coverage/commerce$ImagesServiceTest.ic" NAME="ImagesServiceTest Coverage Results" MODIFIED="1668078278207" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
@@ -426,19 +423,34 @@
     <SUITE FILE_PATH="coverage/commerce$UserServiceTest_saveUser.ic" NAME="UserServiceTest.saveUser Coverage Results" MODIFIED="1666123746538" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>com.e.commerce.service.*</FILTER>
     </SUITE>
-    <SUITE FILE_PATH="coverage/commerce$UserServiceTest_whenGetUserAsDtoCalledWithNonExistUser_thenItShouldThrowDataNotFoundException.ic" NAME="UserServiceTest.whenGetUserAsDtoCalledWithNonExistUser_thenItShouldThrowDataNotFoundException Coverage Results" MODIFIED="1666123759041" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>com.e.commerce.service.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/commerce$com_e_commerce_service_in_commerce.ic" NAME="com.e.commerce.service in commerce Coverage Results" MODIFIED="1668078492661" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+    <SUITE FILE_PATH="coverage/commerce$ProductCustomizationServiceTest.ic" NAME="ProductCustomizationServiceTest Coverage Results" MODIFIED="1668109330128" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>com.e.commerce.service.*</FILTER>
     </SUITE>
     <SUITE FILE_PATH="coverage/commerce$AddressServiceTest_whenFindAddressByIdOrElseThrowCalledNotExistAddress_thenItShouldThrowDataNotFoundException.ic" NAME="AddressServiceTest.whenFindAddressByIdOrElseThrowCalledNotExistAddress_thenItShouldThrowDataNotFoundException Coverage Results" MODIFIED="1666125128435" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>com.e.commerce.service.*</FILTER>
     </SUITE>
-    <SUITE FILE_PATH="coverage/commerce$UserServiceTest_whenGetUserAsDtoCalledWithExistUser_thenItShouldReturnUserDto.ic" NAME="UserServiceTest.whenGetUserAsDtoCalledWithExistUser_thenItShouldReturnUserDto Coverage Results" MODIFIED="1666123752362" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+    <SUITE FILE_PATH="coverage/commerce$AdminServiceTest_whenGetAllProductWithSellerForAdminCalled_itShouldReturnGetAllProductWithSellerDtoList.ic" NAME="AdminServiceTest.whenGetAllProductWithSellerForAdminCalled_itShouldReturnGetAllProductWithSellerDtoList Coverage Results" MODIFIED="1666131331372" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>com.e.commerce.service.*</FILTER>
     </SUITE>
-    <SUITE FILE_PATH="coverage/commerce$AdminServiceTest_whenGetAllProductWithSellerForAdminCalled_itShouldReturnGetAllProductWithSellerDtoList.ic" NAME="AdminServiceTest.whenGetAllProductWithSellerForAdminCalled_itShouldReturnGetAllProductWithSellerDtoList Coverage Results" MODIFIED="1666131331372" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+    <SUITE FILE_PATH="coverage/commerce$UserServiceTest_whenFindUserByIdOrElseThrowCalledExistUser_thenItShouldReturnUser.ic" NAME="UserServiceTest.whenFindUserByIdOrElseThrowCalledExistUser_thenItShouldReturnUser Coverage Results" MODIFIED="1666123815634" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>com.e.commerce.service.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/commerce$AddressServiceTest_whenUpdateAddressCalled_thenItShouldReturnUpdatedAddress.ic" NAME="AddressServiceTest.whenUpdateAddressCalled_thenItShouldReturnUpdatedAddress Coverage Results" MODIFIED="1666127996449" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>com.e.commerce.service.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/commerce$UserServiceTest_whenUpdateUserCalledExistUser_thenItShouldReturnUserDto.ic" NAME="UserServiceTest.whenUpdateUserCalledExistUser_thenItShouldReturnUserDto Coverage Results" MODIFIED="1666123830269" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>com.e.commerce.service.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/commerce$AddressServiceTest_whenFindAddressByIdOrElseThrowCalledExistAddress_thenItShouldReturnAddress.ic" NAME="AddressServiceTest.whenFindAddressByIdOrElseThrowCalledExistAddress_thenItShouldReturnAddress Coverage Results" MODIFIED="1666124890457" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>com.e.commerce.service.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/commerce$UserServiceTest_whenGetUserAsDtoCalledWithNonExistUser_thenItShouldThrowDataNotFoundException.ic" NAME="UserServiceTest.whenGetUserAsDtoCalledWithNonExistUser_thenItShouldThrowDataNotFoundException Coverage Results" MODIFIED="1666123759041" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>com.e.commerce.service.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/commerce$com_e_commerce_service_in_commerce.ic" NAME="com.e.commerce.service in commerce Coverage Results" MODIFIED="1668106728789" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>com.e.commerce.service.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/commerce$UserServiceTest_whenGetUserAsDtoCalledWithExistUser_thenItShouldReturnUserDto.ic" NAME="UserServiceTest.whenGetUserAsDtoCalledWithExistUser_thenItShouldReturnUserDto Coverage Results" MODIFIED="1666123752362" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>com.e.commerce.service.*</FILTER>
     </SUITE>
   </component>
