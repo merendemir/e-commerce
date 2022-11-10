@@ -5,25 +5,22 @@ import com.e.commerce.dto.UserCreateRequestDto;
 import com.e.commerce.dto.UserDto;
 import com.e.commerce.dto.converter.AddressDtoConverter;
 import com.e.commerce.dto.converter.UserDtoConverter;
-import com.e.commerce.enums.Role;
 import com.e.commerce.exceptions.DataNotFoundException;
 import com.e.commerce.model.Address;
 import com.e.commerce.model.User;
 import com.e.commerce.repository.UserRepository;
-import lombok.ToString;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.jupiter.api.BeforeEach;
 import org.mockito.Mockito;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.*;
 
 public class UserServiceTest {
 
@@ -53,429 +50,529 @@ public class UserServiceTest {
 
     @Test
     public void whenCreateAndSaveUserCalled_thenItShouldReturnUserDto() {
-        UserCreateRequestDto userCreateRequestDto = this.generateUserCreateRequestDto();
-        UserDto userDto = this.generateUserDto();
-        User user = this.generateUserFromUserCreateRequestDto(userCreateRequestDto);
+        //given
+        UserCreateRequestDto userCreateRequestDto = UserCreateRequestDto.builder()
+                .name("name")
+                .lastName("lastname")
+                .password("password")
+                .build();
 
-        Mockito.when(userRepository.save(any(User.class))).thenReturn(user);
-        Mockito.when(userDtoConverter.convertFromUserToUserDto(user)).thenReturn(userDto);
+        User user = User.builder()
+                .id(1L)
+                .name(userCreateRequestDto.getName())
+                .lastName(userCreateRequestDto.getLastName())
+                .password(userCreateRequestDto.getPassword())
+                .build();
 
-        UserDto result = userService.createAndSaveUser(userCreateRequestDto);
+        UserDto userDto = UserDto.builder()
+                .name(user.getName())
+                .lastName(user.getLastName())
+                .build();
 
-        Assert.assertEquals(userDto, result);
+        //when
+        when(userRepository.save(any(User.class))).thenReturn(user);
+        when(userDtoConverter.convertFromUserToUserDto(user)).thenReturn(userDto);
 
-        Mockito.verify(userRepository).save(any(User.class));
-        Mockito.verify(userDtoConverter).convertFromUserToUserDto(user);
+        //then
+        UserDto actual = userService.createAndSaveUser(userCreateRequestDto);
+
+        assertEquals(userDto, actual);
+
+        Mockito.verify(userRepository, times(1)).save(any(User.class));
+        Mockito.verify(userDtoConverter, times(1)).convertFromUserToUserDto(user);
     }
 
     @Test
-    public void saveUser() {
-        User user = this.generateUserFromUserDto(this.generateUserDto());
-        Mockito.when(userRepository.save(user)).thenReturn(user);
+    public void whenSaveUserCalled_ThenItShoultReturnUser() {
+        //given
+        User user = User.builder()
+                .id(1L)
+                .name("name")
+                .lastName("lastname")
+                .password("password")
+                .build();
 
-        User result = userService.saveUser(user);
+        //when
+        when(userRepository.save(any(User.class))).thenReturn(user);
 
-        Assert.assertEquals(user, result);
+        //then
+        User actual = userService.saveUser(user);
 
-        Mockito.verify(userRepository).save(user);
+        assertEquals(user, actual);
+        Mockito.verify(userRepository, times(1)).save(any(User.class));
     }
 
     @Test
     public void whenGetUserAsDtoCalledWithExistUser_thenItShouldReturnUserDto() {
-        UserDto userDto = this.generateUserDto();
-        User user = this.generateUserFromUserDto(userDto);
+        //given
+        User user = User.builder()
+                .id(1L)
+                .name("name")
+                .lastName("lastname")
+                .password("password")
+                .build();
 
-        Mockito.when(userRepository.findById(user.getId())).thenReturn(Optional.of(user));
-        Mockito.when(userDtoConverter.convertFromUserToUserDto(user)).thenReturn(userDto);
+        UserDto userDto = UserDto.builder()
+                .name(user.getName())
+                .lastName(user.getLastName())
+                .build();
 
-        UserDto result = userService.getUserAsDto(user.getId());
+        //when
+        when(userRepository.findById(user.getId())).thenReturn(Optional.of(user));
+        when(userDtoConverter.convertFromUserToUserDto(user)).thenReturn(userDto);
 
-        Assert.assertEquals(result, userDto);
+        //then
+        UserDto actual = userService.getUserAsDto(user.getId());
 
-        Mockito.verify(userRepository).findById(user.getId());
-        Mockito.verify(userDtoConverter).convertFromUserToUserDto(user);
+        assertEquals(userDto, actual);
+
+        Mockito.verify(userRepository, times(1)).findById(user.getId());
+        Mockito.verify(userDtoConverter, times(1)).convertFromUserToUserDto(user);
     }
 
     @Test(expected = DataNotFoundException.class)
     public void whenGetUserAsDtoCalledWithNonExistUser_thenItShouldThrowDataNotFoundException() {
+        //given
         long userId = -1;
 
-        Mockito.when(userRepository.findById(userId)).thenThrow(new DataNotFoundException("User not found by id :" + userId));
-        Assert.assertNull(userService.getUserAsDto(userId));
+        //when
+        when(userRepository.findById(userId)).thenThrow(new DataNotFoundException("User not found by id :" + userId));
 
-        Mockito.verifyNoInteractions(userDtoConverter);
+        //then
+        assertNull(userService.getUserAsDto(userId));
+
+        verifyNoInteractions(userDtoConverter);
     }
 
     @Test
     public void whenGetAllUserForAdminAndRepositoryDoesNotHaveUser_thenItShouldReturnEmptyList() {
+        //given
+        List<User> userList = new ArrayList<>();
 
-        Mockito.when(userRepository.findAll()).thenReturn(new ArrayList<>());
+        //when
+        when(userRepository.findAll()).thenReturn(userList);
 
-        List<User> result = userService.getAllUserForAdmin();
+        //then
+        List<User> actual = userService.getAllUserForAdmin();
 
-        Assert.assertEquals(result, new ArrayList<>());
+        assertEquals(userList, actual);
+        assertEquals(0, actual.size());
 
-        Mockito.verify(userRepository).findAll();
+        Mockito.verify(userRepository, times(1)).findAll();
     }
 
     @Test
     public void whenGetAllUserForAdminAndRepositoryHaveUser_thenItShouldReturnUserDtoList() {
-        UserDto userDto = this.generateUserDto();
-        UserDto userDto2 = this.generateUserDto2();
+        //given
+        User user = User.builder()
+                .id(1L)
+                .name("name")
+                .build();
 
-        User user = this.generateUserFromUserDto(userDto);
-        User user2 = this.generateUserFromUserDto(userDto2);
+        User user2 = User.builder()
+                .id(2L)
+                .name("name2")
+                .build();
 
-        Mockito.when(userRepository.findAll()).thenReturn(List.of(user, user2));
+        List<User> userList = List.of(user, user2);
 
-        List<User> result = userService.getAllUserForAdmin();
+        //when
+        when(userRepository.findAll()).thenReturn(userList);
 
-        Assert.assertEquals(result, List.of(user, user2));
+        //then
+        List<User> actual = userService.getAllUserForAdmin();
 
-        Mockito.verify(userRepository).findAll();
+        assertEquals(userList, actual);
+
+        Mockito.verify(userRepository, times(1)).findAll();
     }
 
     @Test
     public void whenFindUserByIdOrElseThrowCalledExistUser_thenItShouldReturnUser() {
-        User user = this.generateUserFromUserDto(this.generateUserDto());
+        //given
+        User user = User.builder()
+                .id(1L)
+                .name("name")
+                .build();
 
-        Mockito.when(userRepository.findById(user.getId())).thenReturn(Optional.of(user));
+        //when
+        when(userRepository.findById(user.getId())).thenReturn(Optional.of(user));
 
-        User result = userService.findUserByIdOrElseThrow(user.getId());
+        //then
+        User actual = userService.findUserByIdOrElseThrow(user.getId());
 
-        Assert.assertEquals(result, user);
+        assertEquals(actual, user);
 
-        Mockito.verify(userRepository).findById(user.getId());
+        Mockito.verify(userRepository, times(1)).findById(user.getId());
     }
 
     @Test(expected = DataNotFoundException.class)
     public void whenFindUserByIdOrElseThrowCalledNotExistUser_thenItShouldThrowDataNotFoundException() {
+        //given
         long userId = -1;
 
-        Mockito.when(userRepository.findById(userId)).thenThrow(new DataNotFoundException("User not found by id :" + userId));
-        Assert.assertNull(userService.findUserByIdOrElseThrow(userId));
+        //when
+        when(userRepository.findById(userId)).thenThrow(new DataNotFoundException("User not found by id :" + userId));
+        assertNull(userService.findUserByIdOrElseThrow(userId));
 
-        Mockito.verify(userRepository).findById(userId);
+        Mockito.verify(userRepository, times(1)).findById(userId);
     }
 
     @Test
     public void whenFindUserByEmailOrElseThrowCalledExistUser_thenItShouldReturnUser() {
-        User user = this.generateUserFromUserDto(this.generateUserDto());
+        //given
+        User user = User.builder()
+                .id(1L)
+                .name("name")
+                .email("email")
+                .build();
 
-        Mockito.when(userRepository.findByEmail(user.getEmail())).thenReturn(Optional.of(user));
+        //when
+        when(userRepository.findByEmail(user.getEmail())).thenReturn(Optional.of(user));
 
-        User result = userService.findUserByEmailOrElseThrow(user.getEmail());
+        //then
+        User actual = userService.findUserByEmailOrElseThrow(user.getEmail());
 
-        Assert.assertEquals(result, user);
+        assertEquals(user, actual);
 
-        Mockito.verify(userRepository).findByEmail(user.getEmail());
+        Mockito.verify(userRepository, times(1)).findByEmail(user.getEmail());
     }
 
     @Test(expected = DataNotFoundException.class)
     public void whenFindUserByEmailOrElseThrowCalledNotExistUser_thenItShouldThrowDataNotFoundException() {
+        //given
         String email = "";
 
-        Mockito.when(userRepository.findByEmail(email)).thenThrow(new DataNotFoundException("User not found by email :" + email));
-        Assert.assertNull(userService.findUserByEmailOrElseThrow(email));
+        //when
+        when(userRepository.findByEmail(email)).thenThrow(new DataNotFoundException("User not found by email :" + email));
 
-        Mockito.verify(userRepository).findByEmail(email);
+        assertNull(userService.findUserByEmailOrElseThrow(email));
+
+        Mockito.verify(userRepository, times(1)).findByEmail(email);
     }
 
     @Test
-    public void whenUpdateUserCalledExistUser_thenItShouldReturnUserDto() {
-        User user = this.generateUserFromUserDto(this.generateUserDto());
+    public void whenUpdateUserCalledExistUser_thenItShouldReturnUpdatedUserDto() {
+        //given
+        User user = User.builder()
+                .id(1L)
+                .name("name")
+                .lastName("lastname")
+                .build();
 
-        UserDto userDto = this.generateUserDto2();
-        User updatedUser = this.generateUserFromUserDto(userDto);
+        User updatedUser = User.builder()
+                .id(1L)
+                .name("name2")
+                .lastName("lastname2")
+                .build();
 
-        Mockito.when(userRepository.findById(user.getId())).thenReturn(Optional.of(user));
-        Mockito.when(userRepository.save(updatedUser)).thenReturn(updatedUser);
-        Mockito.when(userDtoConverter.convertFromUserToUserDto(updatedUser)).thenReturn(userDto);
+        UserDto userDto = UserDto.builder()
+                .name(updatedUser.getName())
+                .lastName(updatedUser.getLastName())
+                .build();
 
-        UserDto result = userService.updateUser(user.getId(), userDto);
+        //when
+        when(userRepository.findById(user.getId())).thenReturn(Optional.of(user));
+        when(userRepository.save(updatedUser)).thenReturn(updatedUser);
+        when(userDtoConverter.convertFromUserToUserDto(updatedUser)).thenReturn(userDto);
 
-        Assert.assertEquals(result, userDto);
+        UserDto actual = userService.updateUser(user.getId(), userDto);
 
-        Mockito.verify(userRepository).findById(user.getId());
-        Mockito.verify(userRepository).save(updatedUser);
-        Mockito.verify(userDtoConverter).convertFromUserToUserDto(updatedUser);
+        assertEquals(userDto, actual);
+
+        Mockito.verify(userRepository, times(1)).findById(user.getId());
+        Mockito.verify(userRepository, times(1)).save(updatedUser);
+        Mockito.verify(userDtoConverter, times(1)).convertFromUserToUserDto(updatedUser);
     }
 
     @Test
     public void whenDeleteUserCalledExistUser_thenItShouldReturnUser() {
-        User user = this.generateUserFromUserDto(this.generateUserDto());
+        //given
+        User user = User.builder()
+                .id(1L)
+                .name("name")
+                .lastName("lastname")
+                .build();
 
-        Mockito.when(userRepository.findById(user.getId())).thenReturn(Optional.of(user));
+        //when
+        when(userRepository.findById(user.getId())).thenReturn(Optional.of(user));
 
-        User result = userService.deleteUser(user.getId());
+        User actual = userService.deleteUser(user.getId());
 
-        Assert.assertEquals(result, user);
+        assertEquals(user, actual);
 
-        Mockito.verify(userRepository).findById(user.getId());
-        Mockito.verify(userRepository).delete(user);
+        Mockito.verify(userRepository, times(1)).findById(user.getId());
+        Mockito.verify(userRepository, times(1)).delete(user);
     }
 
     @Test
     public void whenSaveUserAddressCalledAndUserAddressNotExists_thenItShouldReturnAddressDtoList() {
-        UserDto userDto = this.generateUserDto();
-        User user = this.generateUserFromUserDto(userDto);
-        AddressDto addressDto = this.generateUserAddressDto();
-        Address address = this.generateUserAddressFromAddressDto(addressDto);
-        User userWithAddress = this.generateUserFromUserDtoWithAddress(userDto, List.of(address));
+        //given
+        AddressDto addressDto = AddressDto.builder()
+                .title("home")
+                .city("Istanbul")
+                .build();
 
-        Mockito.when(userRepository.findById(user.getId())).thenReturn(Optional.of(user));
-        Mockito.when(addressService.createAndSaveAddress(addressDto)).thenReturn(address);
-        Mockito.when(userRepository.save(userWithAddress)).thenReturn(userWithAddress);
-        Mockito.when(addressDtoConverter.convertToAddressDto(userWithAddress.getAddresses().get(0))).thenReturn(addressDto);
+        Address address = Address.builder()
+                .id(1L)
+                .title(addressDto.getTitle())
+                .city(addressDto.getCity())
+                .build();
 
-        List<AddressDto> result = userService.saveUserAddress(user.getId(), addressDto);
+        User user = User.builder()
+                .id(1L)
+                .build();
 
-        Assert.assertEquals(result, List.of(addressDto));
-        Assert.assertEquals(result.size(), 1);
+        User userWithAddress = User.builder()
+                .id(1L)
+                .addresses(List.of(address))
+                .build();
+
+        //when
+        when(userRepository.findById(user.getId())).thenReturn(Optional.of(user));
+        when(addressService.createAndSaveAddress(addressDto)).thenReturn(address);
+        when(userRepository.save(userWithAddress)).thenReturn(userWithAddress);
+        when(addressDtoConverter.convertToAddressDto(userWithAddress.getAddresses().get(0))).thenReturn(addressDto);
+
+        List<AddressDto> actual = userService.saveUserAddress(user.getId(), addressDto);
+
+        assertEquals(List.of(addressDto), actual);
+        assertEquals(1, actual.size());
 
         Mockito.verify(userRepository, times(2)).findById(user.getId());
-        Mockito.verify(addressService).createAndSaveAddress(addressDto);
-        Mockito.verify(userRepository).save(userWithAddress);
-        Mockito.verify(addressDtoConverter).convertToAddressDto(address);
+        Mockito.verify(addressService, times(1)).createAndSaveAddress(addressDto);
+        Mockito.verify(userRepository, times(1)).save(user);
+        Mockito.verify(addressDtoConverter, times(1)).convertToAddressDto(address);
     }
 
     @Test
     public void whenSaveUserAddressCalledAndUserAddressExists_thenItShouldReturnAddressDtoList() {
-        AddressDto userAddressDto = this.generateUserAddressDto();
-        Address userAddress = this.generateUserAddressFromAddressDto(userAddressDto);
-        User userWithAddress = this.generateUserFromUserDtoWithAddress(this.generateUserDto(), List.of(userAddress));
+        //given
+        AddressDto addressDto = AddressDto.builder()
+                .title("home")
+                .city("Istanbul")
+                .build();
 
-        AddressDto addressDto2 = this.generateUserAddressDto2();
-        Address address2 = this.generateUserAddressFromAddressDto2(addressDto2);
+        Address address = Address.builder()
+                .id(1L)
+                .title(addressDto.getTitle())
+                .city(addressDto.getCity())
+                .build();
 
-        User userAfterAddedAddress = this.generateUserFromUserDtoWithAddress(this.generateUserDto(), List.of(userAddress, address2));
+        AddressDto addressDto2 = AddressDto.builder()
+                .title("home2")
+                .city("Ankara")
+                .build();
 
-        Mockito.when(userRepository.findById(userWithAddress.getId())).thenReturn(Optional.of(userWithAddress));
-        Mockito.when(addressService.createAndSaveAddress(addressDto2)).thenReturn(address2);
-        Mockito.when(userRepository.save(userAfterAddedAddress)).thenReturn(userAfterAddedAddress);
-        Mockito.when(addressDtoConverter.convertToAddressDto(userAfterAddedAddress.getAddresses().get(0))).thenReturn(userAddressDto);
-        Mockito.when(addressDtoConverter.convertToAddressDto(userAfterAddedAddress.getAddresses().get(1))).thenReturn(addressDto2);
+        Address address2 = Address.builder()
+                .id(2L)
+                .title(addressDto.getTitle())
+                .city(addressDto.getCity())
+                .build();
 
-        List<AddressDto> result = userService.saveUserAddress(userWithAddress.getId(), addressDto2);
+        User user = User.builder()
+                .id(1L)
+                .addresses(List.of(address))
+                .build();
 
-        Assert.assertEquals(result, List.of(userAddressDto, addressDto2));
-        Assert.assertEquals(result.size(), 2);
+        User userAfterAddedNewAddress = User.builder()
+                .id(1L)
+                .addresses(List.of(address, address2))
+                .build();
 
-        Mockito.verify(userRepository, times(2)).findById(userWithAddress.getId());
-        Mockito.verify(userRepository, times(2)).findById(userAfterAddedAddress.getId());
-        Mockito.verify(addressService).createAndSaveAddress(addressDto2);
-        Mockito.verify(userRepository).save(userWithAddress);
-        Mockito.verify(addressDtoConverter).convertToAddressDto(userWithAddress.getAddresses().get(0));
-        Mockito.verify(addressDtoConverter).convertToAddressDto(userAfterAddedAddress.getAddresses().get(1));
+        //when
+        when(userRepository.findById(user.getId())).thenReturn(Optional.of(user));
+        when(addressService.createAndSaveAddress(addressDto2)).thenReturn(address2);
+        when(userRepository.save(userAfterAddedNewAddress)).thenReturn(userAfterAddedNewAddress);
+        when(addressDtoConverter.convertToAddressDto(userAfterAddedNewAddress.getAddresses().get(0))).thenReturn(addressDto);
+        when(addressDtoConverter.convertToAddressDto(userAfterAddedNewAddress.getAddresses().get(1))).thenReturn(addressDto2);
+
+        //then
+        List<AddressDto> actual = userService.saveUserAddress(userAfterAddedNewAddress.getId(), addressDto2);
+
+        assertEquals(actual, List.of(addressDto, addressDto2));
+        assertEquals(actual.size(), 2);
+
+        Mockito.verify(userRepository, times(2)).findById(user.getId());
+        Mockito.verify(addressService, times(1)).createAndSaveAddress(addressDto2);
+        Mockito.verify(userRepository, times(1)).save(userAfterAddedNewAddress);
+        Mockito.verify(addressDtoConverter, times(1)).convertToAddressDto(userAfterAddedNewAddress.getAddresses().get(0));
+        Mockito.verify(addressDtoConverter, times(1)).convertToAddressDto(userAfterAddedNewAddress.getAddresses().get(1));
     }
 
     @Test
-    public void whenGetUserAddressCalled_thenItShouldReturnAddressDtoList() {
-        AddressDto addressDto = this.generateUserAddressDto();
-        Address address = this.generateUserAddressFromAddressDto(addressDto);
+    public void whenGetUserAddressCalledAndUserAddressExists_thenItShouldReturnAddressDtoList() {
+        //given
+        AddressDto addressDto = AddressDto.builder()
+                .title("home")
+                .city("Istanbul")
+                .build();
 
-        AddressDto addressDto2 = this.generateUserAddressDto2();
-        Address address2 = this.generateUserAddressFromAddressDto2(addressDto2);
+        Address address = Address.builder()
+                .id(1L)
+                .title(addressDto.getTitle())
+                .city(addressDto.getCity())
+                .build();
 
-        User userWithAddress = this.generateUserFromUserDtoWithAddress(this.generateUserDto(), List.of(address, address2));
+        AddressDto addressDto2 = AddressDto.builder()
+                .title("home2")
+                .city("Ankara")
+                .build();
 
-        Mockito.when(userRepository.findById(userWithAddress.getId())).thenReturn(Optional.of(userWithAddress));
-        Mockito.when(addressDtoConverter.convertToAddressDto(userWithAddress.getAddresses().get(0))).thenReturn(addressDto);
-        Mockito.when(addressDtoConverter.convertToAddressDto(userWithAddress.getAddresses().get(1))).thenReturn(addressDto2);
+        Address address2 = Address.builder()
+                .id(2L)
+                .title(addressDto.getTitle())
+                .city(addressDto.getCity())
+                .build();
 
-        List<AddressDto> result = userService.getUserAddress(userWithAddress.getId());
+        User user = User.builder()
+                .id(1L)
+                .addresses(List.of(address, address2))
+                .build();
 
-        Assert.assertEquals(result, List.of(addressDto, addressDto2));
-        Assert.assertEquals(result.size(), 2);
+        //when
+        when(userRepository.findById(user.getId())).thenReturn(Optional.of(user));
+        when(addressDtoConverter.convertToAddressDto(user.getAddresses().get(0))).thenReturn(addressDto);
+        when(addressDtoConverter.convertToAddressDto(user.getAddresses().get(1))).thenReturn(addressDto2);
 
-        Mockito.verify(userRepository).findById(userWithAddress.getId());
-        Mockito.verify(addressDtoConverter).convertToAddressDto(userWithAddress.getAddresses().get(0));
-        Mockito.verify(addressDtoConverter).convertToAddressDto(userWithAddress.getAddresses().get(1));
+        //then
+        List<AddressDto> actual = userService.getUserAddress(user.getId());
+
+        assertEquals(List.of(addressDto, addressDto2), actual);
+        assertEquals(actual.size(), 2);
+
+        Mockito.verify(userRepository).findById(user.getId());
+        Mockito.verify(addressDtoConverter).convertToAddressDto(user.getAddresses().get(0));
+        Mockito.verify(addressDtoConverter).convertToAddressDto(user.getAddresses().get(1));
+    }
+
+    @Test
+    public void whenGetUserAddressCalledAndUserAddressNonExists_thenItShouldReturnEmptyList() {
+        //given
+        User user = User.builder()
+                .id(1L)
+                .name("name")
+                .build();
+
+        //when
+        when(userRepository.findById(user.getId())).thenReturn(Optional.of(user));
+
+        //then
+        List<AddressDto> actual = userService.getUserAddress(user.getId());
+
+        assertEquals(new ArrayList<>(), actual);
+        assertEquals(actual.size(), 0);
+
+        Mockito.verify(userRepository).findById(user.getId());
     }
 
     @Test
     public void whenUpdateUserAddressCalledAndUserAddressExists_thenItShouldReturnAddressDtoList() {
-        AddressDto addressDto = this.generateUserAddressDto();
-        Address address = this.generateUserAddressFromAddressDto(addressDto);
+        //given
+        AddressDto addressDto = AddressDto.builder()
+                .title("home")
+                .city("Istanbul")
+                .build();
 
-        AddressDto addressDto2 = this.generateUserAddressDto2();
-        Address updatedAddress = this.generateUserAddressFromAddressDto(addressDto2);
+        Address address = Address.builder()
+                .id(1L)
+                .title(addressDto.getTitle())
+                .city(addressDto.getCity())
+                .build();
 
-        User userWithAddress = this.generateUserFromUserDtoWithAddress(this.generateUserDto(), List.of(address));
+        AddressDto updatedAddressDto = AddressDto.builder()
+                .title("home2")
+                .city("Ankara")
+                .build();
 
-        Mockito.when(userRepository.findById(userWithAddress.getId())).thenReturn(Optional.of(userWithAddress));
-        Mockito.when(addressService.updateAddress(address.getId(), addressDto2)).thenReturn(updatedAddress);
-        Mockito.when(addressDtoConverter.convertToAddressDto(updatedAddress)).thenReturn(addressDto2);
+        Address updatedAddress = Address.builder()
+                .id(1L)
+                .title(updatedAddressDto.getTitle())
+                .city(updatedAddressDto.getCity())
+                .build();
 
-        AddressDto result = userService.updateUserAddress(userWithAddress.getId(), address.getId(), addressDto2);
+        User user = User.builder()
+                .id(1L)
+                .addresses(List.of(address))
+                .build();
 
-        Assert.assertEquals(addressDto2, result);
+        //when
+        when(userRepository.findById(user.getId())).thenReturn(Optional.of(user));
+        when(addressService.updateAddress(address.getId(), updatedAddressDto)).thenReturn(updatedAddress);
+        when(addressDtoConverter.convertToAddressDto(updatedAddress)).thenReturn(updatedAddressDto);
 
-        Mockito.verify(userRepository).findById(userWithAddress.getId());
-        Mockito.verify(addressService).updateAddress(address.getId(), addressDto2);
-        Mockito.verify(addressDtoConverter).convertToAddressDto(updatedAddress);
+        //then
+        AddressDto actual = userService.updateUserAddress(user.getId(), address.getId(), updatedAddressDto);
+
+        assertEquals(updatedAddressDto, actual);
+
+        Mockito.verify(userRepository, times(1)).findById(user.getId());
+        Mockito.verify(addressService, times(1)).updateAddress(address.getId(), updatedAddressDto);
+        Mockito.verify(addressDtoConverter, times(1)).convertToAddressDto(updatedAddress);
     }
 
     @Test(expected = DataNotFoundException.class)
-    public void whenUpdateUserAddressCalledAndUserAddressNoTExists_thenItShouldThrowDataNotFoundException() {
-        AddressDto addressDto = this.generateUserAddressDto();
-        User user = this.generateUserFromUserDtoWithAddress(this.generateUserDto(), List.of(generateUserAddressFromAddressDto(addressDto)));
+    public void whenUpdateUserAddressCalledAndUserAddressNonExists_thenItShouldThrowDataNotFoundException() {
+        //given
+        AddressDto addressDto = AddressDto.builder()
+                .title("home")
+                .city("Istanbul")
+                .build();
+
+        User user = User.builder()
+                .id(1L)
+                .name("name")
+                .build();
+
         Long addressId = -1L;
 
-        Mockito.when(userRepository.findById(user.getId())).thenReturn(Optional.of(user));
-        Mockito.when(addressService.updateAddress(addressId, addressDto)).thenThrow(new DataNotFoundException("Address not found by id :" + addressId));
+        //when
+        when(userRepository.findById(user.getId())).thenReturn(Optional.of(user));
+        when(addressService.updateAddress(addressId, addressDto)).thenThrow(new DataNotFoundException("Address not found by id :" + addressId));
 
-        AddressDto result = userService.updateUserAddress(user.getId(), addressId, addressDto);
+        //then
+        AddressDto actual = userService.updateUserAddress(user.getId(), addressId, addressDto);
 
-        Assert.assertNull(result);
+        assertNull(actual);
 
-        Mockito.verify(userRepository).findById(user.getId());
-        Mockito.verify(addressService).updateAddress(addressId, addressDto);
-        Mockito.verifyNoInteractions(addressDtoConverter);
+        Mockito.verify(userRepository, times(1)).findById(user.getId());
+        Mockito.verify(addressService, times(1)).updateAddress(addressId, addressDto);
+        verifyNoInteractions(addressDtoConverter);
     }
 
     @Test
     public void whenDeleteUserAddressCalled_thenItShouldReturnAddressDtoList() {
-        AddressDto addressDto = this.generateUserAddressDto();
-        Address address = this.generateUserAddressFromAddressDto(addressDto);
+        //given
+        AddressDto addressDto = AddressDto.builder()
+                .title("home")
+                .city("Istanbul")
+                .build();
 
-        AddressDto addressDto2 = this.generateUserAddressDto2();
-        Address address2 = this.generateUserAddressFromAddressDto2(addressDto2);
+        Address address = Address.builder()
+                .id(1L)
+                .title(addressDto.getTitle())
+                .city(addressDto.getCity())
+                .build();
 
-        User userWithAddress = this.generateUserFromUserDtoWithAddress(this.generateUserDto(), List.of(address, address2));
-        User userAfterUpdate = this.generateUserFromUserDtoWithAddress(this.generateUserDto(), List.of(address));
+        User user = User.builder()
+                .id(1L)
+                .addresses(List.of(address))
+                .build();
 
-        Mockito.when(userRepository.findById(userWithAddress.getId())).thenReturn(Optional.of(userWithAddress));
-        Mockito.when(userRepository.save(userAfterUpdate)).thenReturn(userAfterUpdate);
-        Mockito.when(userRepository.findById(userAfterUpdate.getId())).thenReturn(Optional.of(userAfterUpdate));
-        Mockito.when(addressDtoConverter.convertToAddressDto(userAfterUpdate.getAddresses().get(0))).thenReturn(addressDto);
+        User userAfterUpdate = User.builder()
+                .id(1L)
+                .addresses(new ArrayList<>())
+                .build();
 
-        List<AddressDto> result = userService.deleteUserAddress(userWithAddress.getId(), address2.getId());
+        //when
+        when(userRepository.findById(user.getId())).thenReturn(Optional.of(user));
+        when(userRepository.save(userAfterUpdate)).thenReturn(userAfterUpdate);
 
-        Assert.assertEquals(List.of(addressDto), result);
-        Assert.assertEquals(result.size(), 1);
+        List<AddressDto> actual = userService.deleteUserAddress(user.getId(), address.getId());
 
-        Mockito.verify(userRepository, times(2)).findById(userWithAddress.getId());
-        Mockito.verify(addressDtoConverter).convertToAddressDto(userWithAddress.getAddresses().get(0));
+        assertEquals(new ArrayList<>(), actual);
+        assertEquals(actual.size(), 0);
+
+        Mockito.verify(userRepository, times(2)).findById(user.getId());
     }
-
-    private UserCreateRequestDto generateUserCreateRequestDto() {
-        return new UserCreateRequestDto(
-                "test",
-                "test",
-                "test@gmail.com",
-                "9054",
-                "1234"
-        );
-    }
-
-    private User generateUserFromUserCreateRequestDto(UserCreateRequestDto userDto) {
-        return new User(
-                135L,
-                new Date(100),
-                new Date(100),
-                userDto.getName(),
-                userDto.getLastName(),
-                userDto.getEmail(),
-                userDto.getPhoneNumber(),
-                userDto.getPassword(),
-                Role.USER,
-                null
-        );
-    }
-
-    private UserDto generateUserDto() {
-        return new UserDto(
-                "test",
-                "test",
-                "test@gmail.com",
-                "9054"
-        );
-    }
-
-    private User generateUserFromUserDto(UserDto userDto) {
-        return new User(
-                135L,
-                new Date(100),
-                new Date(100),
-                userDto.getName(),
-                userDto.getLastName(),
-                userDto.getEmail(),
-                userDto.getPhoneNumber(),
-                null,
-                Role.USER,
-                null
-        );
-    }
-
-    private User generateUserFromUserDtoWithAddress(UserDto userDto, List<Address> addresses) {
-        return new User(
-                135L,
-                new Date(100),
-                new Date(100),
-                userDto.getName(),
-                userDto.getLastName(),
-                userDto.getEmail(),
-                userDto.getPhoneNumber(),
-                null,
-                Role.USER,
-                addresses
-        );
-    }
-
-    private UserDto generateUserDto2() {
-        return new UserDto(
-                "test2",
-                "test2",
-                "test2@gmail.com",
-                "4123"
-        );
-    }
-
-    private AddressDto generateUserAddressDto() {
-        return new AddressDto(
-                "home",
-                "TURKEY",
-                "Istanbul",
-                "center",
-                "home home home"
-        );
-    }
-
-    private Address generateUserAddressFromAddressDto(AddressDto addressDto) {
-        return new Address(
-                139L,
-                new Date(1000),
-                new Date(100),
-                addressDto.getTitle(),
-                addressDto.getCountry(),
-                addressDto.getCity(),
-                addressDto.getDistrict(),
-                addressDto.getOpenAddress()
-        );
-    }
-
-    private AddressDto generateUserAddressDto2() {
-        return new AddressDto(
-                "work",
-                "USA",
-                "NYC",
-                "center",
-                "NYC CENTER"
-        );
-    }
-
-    private Address generateUserAddressFromAddressDto2(AddressDto addressDto) {
-        return new Address(
-                141L,
-                new Date(1000),
-                new Date(100),
-                addressDto.getTitle(),
-                addressDto.getCountry(),
-                addressDto.getCity(),
-                addressDto.getDistrict(),
-                addressDto.getOpenAddress()
-        );
-    }
-
 }

@@ -107,17 +107,29 @@ private final UserDtoConverter userDtoConverter;
     }
 
     public List<AddressDto> getUserAddress(Long userId) {
-        return this.findUserByIdOrElseThrow(userId).getAddresses().stream()
-                .map(addressDtoConverter::convertToAddressDto)
-                .collect(Collectors.toList());
+        List<Address> addressList = this.findUserByIdOrElseThrow(userId).getAddresses();
+        if (addressList != null && !addressList.isEmpty()) {
+            return addressList
+                    .stream()
+                    .map(addressDtoConverter::convertToAddressDto)
+                    .collect(Collectors.toList());
+        } else {
+            return new ArrayList<>();
+        }
     }
 
     public AddressDto updateUserAddress(Long userId, Long addressId, AddressDto addressDto) {
-        List<Long> userAddressesId = this.findUserByIdOrElseThrow(userId).getAddresses().stream()
+        List<Address> addressList = this.findUserByIdOrElseThrow(userId).getAddresses();
+        if (addressList == null || addressList.isEmpty()) {
+            throw new DataNotFoundException("User Address not found by id :" + addressId);
+        }
+
+        List<Long> userAddressesId = addressList
+                .stream()
                 .map(Address::getId)
                 .toList();
 
-        if (userAddressesId.isEmpty() || ! userAddressesId.toString().contains(addressId.toString())) {
+        if (userAddressesId.isEmpty() || !userAddressesId.toString().contains(addressId.toString())) {
             throw new DataNotFoundException("User Address not found by id :" + addressId);
         }
 
@@ -126,8 +138,15 @@ private final UserDtoConverter userDtoConverter;
 
     public List<AddressDto> deleteUserAddress(Long userId, Long addressId) {
         User user = this.findUserByIdOrElseThrow(userId);
-        if (user.getAddresses() == null) {
-            user.getAddresses().removeIf(address -> address.getId().equals(addressId));
+
+        if (user.getAddresses() != null && !user.getAddresses().isEmpty()) {
+            List<Address> addressList = user.getAddresses()
+                    .stream()
+                    .filter(userAddress -> !Objects.equals(userAddress.getId(), addressId))
+                    .toList();
+
+            user.setAddresses(addressList);
+
             this.saveUser(user);
             addressService.deleteAddress(addressId);
         }
